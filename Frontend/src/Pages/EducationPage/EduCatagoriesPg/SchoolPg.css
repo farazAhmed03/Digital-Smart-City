@@ -1,0 +1,288 @@
+/* ================= ELEGANT DESIGN SYSTEM ================= */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+    --sch-accent: #16A34A;
+    --sch-bg: #F8FAFC;
+    --sch-white: #FFFFFF;
+    --sch-dark: #0F172A;
+    --sch-muted: #64748B;
+    --sch-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+    --sch-shadow-hover: 0 20px 60px -15px rgba(0, 0, 0, 0.1);
+    --sch-radius: 20px;
+    --sch-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sch-page-wrapper {
+    background-color: var(--sch-bg);
+    color: var(--sch-dark);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+}
+
+.sch-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* ================= 1. HERO MINIMAL ================= */
+.sch-hero-minimal {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 5%;
+    background: linear-gradient(rgba(248, 250, 252, 0.5), rgba(248, 250, 252, 0.7)),
+        url('https://images.pexels.com/photos/6344228/pexels-photo-6344228.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Decorative Shapes */
+.sch-hero-bg-shapes .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.2;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: #16A34A;
+    top: -100px;
+    left: -100px;
+    animation: floatShape 20s infinite alternate;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: #2563EB;
+    bottom: -50px;
+    right: -50px;
+    animation: floatShape 15s infinite alternate-reverse;
+}
+
+@keyframes floatShape {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(100px, 50px);
+    }
+}
+
+.sch-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.sch-hero-inner h1 {
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--sch-dark);
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.sch-hero-inner p {
+    font-size: 1.25rem;
+    color: var(--sch-muted);
+    margin-bottom: 3.5rem;
+    font-weight: 400;
+}
+
+/* Glassmorphism Search */
+.sch-glass-search {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    max-width: 650px;
+    margin: 0 auto;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+}
+
+.sch-search-icon {
+    margin-left: 20px;
+    color: var(--sch-muted);
+    font-size: 1.2rem;
+}
+
+.sch-glass-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+    color: var(--sch-dark);
+}
+
+.sch-glass-search button {
+    background: var(--sch-accent);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 100px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--sch-transition);
+}
+
+.sch-glass-search button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
+}
+
+/* ================= 4. LISTING MINIMAL ================= */
+.sch-listing-minimal {
+    padding: 100px 0;
+}
+
+.sch-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.sch-simple-card {
+    background: var(--sch-white);
+    border-radius: 24px;
+    padding: 15px;
+    transition: var(--sch-transition);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.sch-simple-card:hover {
+    border-color: rgba(22, 163, 74, 0.2);
+    background: white;
+    box-shadow: var(--sch-shadow);
+}
+
+.sch-simple-img {
+    height: 220px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.sch-simple-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sch-simple-info h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.sch-simple-info p {
+    color: var(--sch-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.sch-view-btn {
+    width: 100%;
+    padding: 14px;
+    background: #F1F5F9;
+    color: var(--sch-dark);
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--sch-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sch-simple-card:hover .sch-view-btn {
+    background: var(--sch-accent);
+    color: white;
+}
+
+.sch-loading-full {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: var(--sch-bg);
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--sch-accent);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.sch-no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px 0;
+    color: var(--sch-muted);
+}
+
+.sch-no-results h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--sch-dark);
+    margin-bottom: 1rem;
+}
+
+.sch-no-results p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .sch-hero-inner h1 {
+        font-size: 2.5rem;
+    }
+
+    .sch-glass-search {
+        flex-direction: column;
+        border-radius: 30px;
+    }
+
+    .sch-glass-search button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .sch-cta-box h2 {
+        font-size: 2rem;
+    }
+}

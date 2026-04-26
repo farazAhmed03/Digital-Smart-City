@@ -1,0 +1,112 @@
+.NA_container {
+    padding: 20px;
+    width: 100%;
+}
+
+.NA_title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+.NA_empty {
+    padding: 30px;
+    text-align: center;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.NA_table_wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.NA_table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.NA_table th {
+    text-align: left;
+    padding: 12px;
+    background-color: #f3f4f6;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.NA_table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.NA_student_info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.NA_name {
+    font-weight: 600;
+}
+
+.NA_phone {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.NA_screenshot_link {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.NA_no_screenshot {
+    color: red;
+    font-weight: 600;
+}
+
+.NA_status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Status Colors */
+.NA_status.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.NA_status.cleared {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.NA_status.rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .NA_title {
+        font-size: 18px;
+    }
+
+    .NA_table th,
+    .NA_table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .NA_table {
+        min-width: 650px;
+    }
+}

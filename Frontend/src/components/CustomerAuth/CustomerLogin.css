@@ -1,0 +1,98 @@
+.customer-auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f4f6f9;
+    padding: 20px;
+}
+
+.customer-auth-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.customer-auth-box h2 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.customer-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.customer-auth-btn {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.customer-auth-btn:hover {
+    background-color: #2980b9;
+}
+
+.customer-forgot-pass {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.customer-forgot-pass span {
+    color: #3498db;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.customer-forgot-pass span:hover {
+    text-decoration: underline;
+}
+
+.customer-auth-toggle {
+    margin-top: 20px;
+    color: #3498db;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.95rem;
+}
+
+.customer-auth-toggle:hover {
+    color: #2980b9;
+}

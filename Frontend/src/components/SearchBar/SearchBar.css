@@ -1,0 +1,105 @@
+.Search-Area {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 100;
+}
+
+.Search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.Search-bar:focus-within {
+    border-color: #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+}
+
+.Search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 0.6rem 0.5rem;
+    font-size: 1rem;
+    color: #1e293b;
+    background: transparent;
+}
+
+.Search-bar input::placeholder {
+    color: #94a3b8;
+}
+
+.search-btn {
+    background: #1f8e5c;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.search-btn:hover {
+    background: #166534;
+    transform: scale(1.05);
+}
+
+/* Suggestions List */
+.result-cont {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #f1f5f9;
+}
+
+.result-cont li {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.result-cont li:hover {
+    background-color: #f0fdf4;
+    color: #1f8e5c;
+}
+
+.result-cont::-webkit-scrollbar {
+    width: 6px;
+}
+
+.result-cont::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+    .Search-bar input {
+        font-size: 0.9375rem;
+    }
+}

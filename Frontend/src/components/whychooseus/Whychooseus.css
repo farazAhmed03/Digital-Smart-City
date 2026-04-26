@@ -1,0 +1,122 @@
+/* ===== SECTION WRAPPER ===== */
+.why-section {
+  padding: 80px 10%;
+  background-color: #ffffff;
+  color: #000;
+  display: flex;
+  justify-content: center;
+}
+
+.why-container {
+  max-width: 1200px;
+  width: 100%;
+  text-align: left;
+}
+
+/* ===== HEADING ===== */
+.title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #000;
+  border-left: 6px solid #00c68a;
+  padding-left: 10px;
+  margin-left: -10px;        /* move slightly to left */
+  display: inline-block;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Green underline hover effect */
+.title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 3px;
+  background-color: #00c68a;
+  transition: width 0.3s ease;
+}
+
+.title:hover::after {
+  width: 32%;
+}
+
+/* ===== PARAGRAPH ===== */
+.why-text {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 900px;
+  margin-bottom: 50px;
+  margin-left: 80px;
+}
+
+/* ===== CARDS SECTION ===== */
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.why-card {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  text-align: center;
+  padding: 40px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.why-icon {
+  font-size: 2.5rem;
+  color: #000;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.why-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+/* ===== HOVER EFFECT ===== */
+.why-card:hover {
+  background-color: #00c68a;
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0, 198, 138, 0.4);
+}
+
+.why-card:hover .why-icon,
+.why-card:hover h4 {
+  color: #fff;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 992px) {
+  .why-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .why-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .why-text {
+    font-size: 0.95rem;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}

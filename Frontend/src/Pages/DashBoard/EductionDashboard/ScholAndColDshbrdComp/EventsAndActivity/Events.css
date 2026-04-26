@@ -1,0 +1,83 @@
+.activitiesCont {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 13px;
+    column-gap: 20px;
+    flex-wrap: wrap;
+}
+
+.activitiesCont .actitvityCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.DshbrdActivityLabel {
+    margin-left: 5px;
+}
+
+.DshbrdActivityLabel,
+.actitvityCont input {
+    cursor: pointer;
+}
+
+/* Event CARDS */
+
+.Adm-event-cards-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.Adm-event-card {
+    width: 280px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.Adm-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.Adm-event-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.Adm-event-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0d915a;
+}
+
+.Adm-event-delete-btn {
+    background: #ff4d4f;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.Adm-event-delete-btn:hover {
+    background: #d9363e;
+}
+
+.Adm-event-info {
+    font-size: 0.95rem;
+    margin: 4px 0;
+}

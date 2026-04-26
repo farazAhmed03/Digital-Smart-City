@@ -1,0 +1,64 @@
+# ====================================
+# Environment Variables /Hidden files
+# ====================================
+.env
+.env.local
+.env.development
+.env.production
+
+# ===============================
+# Dependencies
+# ===============================
+node_modules/
+bower_components/
+
+# ===============================
+# Build Outputs
+# ===============================
+dist/
+build/
+.out/
+.next/
+
+# ===============================
+# Logs
+# ===============================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# ===============================
+# OS / Editor Files
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===============================
+# Videos (All Common Formats)
+# ===============================
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.flv
+*.wmv
+videos/
+media/
+
+# ===============================
+# Cache & Temp Files
+# ===============================
+.cache/
+.tmp/
+temp/
+
+# ===============================
+# Optional: Coverage Reports
+# ===============================
+coverage/

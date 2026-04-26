@@ -1,0 +1,262 @@
+/* Full-Width Wrapper */
+.sp-page-wrapper {
+  display: flex;
+  width: 100%;
+  background: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Main Container (Full Width) */
+.sp-main-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  background: white;
+}
+
+/* Left Branding Panel */
+.SPbranding-panel {
+  background: linear-gradient(135deg, #0b6e4f 0%, #085a40 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative Circles */
+.SPbranding-panel::before,
+.SPbranding-panel::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.SPbranding-panel::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+}
+
+.SPbranding-panel::after {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  right: -50px;
+}
+
+.branding-content {
+  position: relative;
+  z-index: 10;
+  max-width: 420px;
+}
+
+.branding-content h1 {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.branding-content p {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Progress */
+.progress-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.progress-step {
+  height: 5px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  transition: all 0.4s ease;
+}
+
+.progress-step.active {
+  background: white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Right Form Panel */
+.sp-form-panel {
+  background: white;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 25px;
+}
+
+/* Input Group */
+.sp-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.sp-input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.sp-input-group input,
+.sp-input-group select {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-input-group input::placeholder {
+  color: #94a3b8;
+}
+
+.sp-input-group input:focus,
+.sp-input-group select:focus {
+  outline: none;
+  border-color: #0b6e4f;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(11, 110, 79, 0.1);
+}
+
+/* Buttons */
+.Edu-Reg-btn-primary {
+  background: #0b6e4f;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.Edu-Reg-btn-primary:hover {
+  background: #085a40;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(11, 110, 79, 0.3);
+}
+
+.Edu-Reg-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.Edu-form-btn-secondary {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Edu-form-btn-secondary:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
+  margin-top: 15px;
+  backdrop-filter: blur(4px);
+}
+
+.back-btn:hover {
+  background: white;
+  color: #0b6e4f;
+  border-color: white;
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.flex-grow {
+  flex: 1;
+}
+
+/* OTP Specific */
+.otp-input-large {
+  letter-spacing: 12px !important;
+  text-align: center !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  color: #0b6e4f !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sp-main-card {
+    grid-template-columns: 1fr;
+  }
+  .SPbranding-panel {
+    padding: 50px 30px;
+  }
+  .sp-form-panel {
+    padding: 30px 20px;
+  }
+}
+
+/* Animation */
+.sp-form-content.fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

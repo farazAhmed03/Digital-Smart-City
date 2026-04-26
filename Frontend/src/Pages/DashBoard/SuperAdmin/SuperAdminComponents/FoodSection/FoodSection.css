@@ -1,0 +1,533 @@
+/* FoodSection.css - cloned from EductionSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.SA_content_body {
+    padding: 15px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+}
+
+/* 2. Sub Nav - The "Pill" Design */
+.SA_sub_nav {
+    display: flex;
+    gap: 6px;
+    background: #e2e8f0;
+    padding: 6px;
+    border-radius: 14px;
+    width: fit-content;
+    margin-bottom: 30px;
+    border: 1px solid #cbd5e1;
+}
+
+.SA_sub_nav button {
+    padding: 10px 24px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.SA_sub_nav button.SA_active {
+    background: #ffffff;
+    color: #108551;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 3. The Table Container Card */
+.SA_table_container {
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.09);
+    overflow: hidden;
+}
+
+.SA_custom_table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* Header Styling */
+.SA_custom_table th {
+    background: #f1f5f9;
+    padding: 20px 24px;
+    color: #475569;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Row Styling */
+.SA_table_row {
+    transition: all 0.2s ease;
+}
+
+.SA_table_row:hover {
+    background-color: #f8fafc;
+}
+
+.SA_table_row td {
+    padding: 18px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    vertical-align: middle;
+}
+
+/* 4. Admin Profile Section */
+.SA_admin_profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.SA_row_avatar {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #108551 0%, #059669 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 6px rgba(16, 133, 81, 0.15);
+}
+
+.SA_admin_name {
+    font-weight: 700;
+    margin: 0;
+    color: #0f172a;
+    font-size: 0.95rem;
+}
+
+/* Institution Label under Name */
+.SA_inst_label {
+    font-size: 0.75rem;
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 6px;
+    color: #64748b;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+/* 6. Action Buttons - Glass Style */
+.SA_row_actions {
+    display: flex;
+    gap: 10px;
+}
+
+.SA_action_icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    color: #64748b;
+}
+
+.SA_action_icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.SA_action_icon.warn:hover {
+    color: #f59e0b;
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.SA_action_icon.danger:hover {
+    color: #ef4444;
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.SA_action_icon.info:hover {
+    color: #3b82f6;
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+/* Contact Information */
+.SA_contact_stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.SA_contact_item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.SA_contact_item svg {
+    color: #94a3b8;
+}
+
+/* Payment Plan Select */
+.SA_plan_badge {
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid #e2e8f0;
+    outline: none;
+    cursor: pointer;
+    background: #ffffff;
+    transition: 0.2s;
+}
+
+.SA_plan_badge:focus {
+    border-color: #108551;
+}
+
+.SA_plan_badge.premium {
+    color: #16a34a;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.SA_plan_badge.enterprise {
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #dbeafe;
+}
+
+.SA_city_text {
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* No Data Placeholder */
+.no-data {
+    padding: 40px;
+    text-align: center;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+
+/* ============================= */
+/* Responsive Adjustments */
+/* ============================= */
+
+/* Make table horizontally scrollable on small screens */
+@media (max-width: 1024px) {
+    .SA_row_avatar {
+        display: none;
+    }
+}
+
+@media (max-width: 910px) {
+    .SA_custom_table {
+        text-align: center;
+    }
+
+    .SA_custom_table th {
+        padding: 15px 14px;
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+    .SA_row_avatar {
+        display: flex;
+    }
+
+    .SA_content_body {
+        padding: 20px;
+    }
+
+    /* Sub Nav pills wrap */
+    .SA_sub_nav {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .SA_sub_nav button {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+    }
+
+    /* Reduce table spacing */
+    .SA_custom_table th,
+    .SA_table_row td {
+        padding: 14px 16px;
+    }
+
+    /* Profile section tighter */
+    .SA_admin_profile {
+        gap: 10px;
+    }
+
+    .SA_row_avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .SA_admin_name {
+        font-size: 0.9rem;
+    }
+
+    /* Action buttons tighter */
+    .SA_row_actions {
+        gap: 6px;
+    }
+
+    .SA_action_icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .SA_content_body {
+        padding: 10px;
+    }
+
+    .SA_table_container {
+        background-color: white;
+    }
+
+    .SA_table_row {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.324) !important;
+    }
+
+    .SA_sub_nav {
+        gap: 6px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .SA_sub_nav button {
+        padding: 8px 10px;
+    }
+}
+
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .SA_content_body {
+        padding: 14px;
+    }
+
+    /* Sub nav full width */
+    .SA_sub_nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .SA_sub_nav button {
+        flex: 1;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 0.75rem;
+    }
+
+    /* Contact info stacks better */
+    .SA_contact_item {
+        font-size: 0.8rem;
+    }
+
+    /* Badges smaller */
+    .SA_row_badge {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    /* Payment plan select */
+    .SA_plan_badge {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+
+    /* No data spacing */
+    .no-data {
+        padding: 24px;
+        font-size: 0.85rem;
+    }
+}
+
+
+/* ============================= */
+/* TRUE MOBILE RESPONSIVE TABLE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    /* Remove table structure */
+    .SA_custom_table,
+    .SA_custom_table thead,
+    .SA_custom_table tbody,
+    .SA_custom_table th,
+    .SA_custom_table tr,
+    .SA_custom_table td {
+        display: block;
+        width: 100%;
+    }
+
+    /* Hide table header */
+    .SA_custom_table thead {
+        display: none;
+    }
+
+    /* Card style rows */
+    .SA_table_row {
+        background: #ffffff;
+        border-radius: 16px;
+        margin-bottom: 16px;
+        padding: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    }
+
+    .SA_table_row td {
+        padding: 10px 0;
+        border: none;
+    }
+
+    /* Admin profile stays horizontal */
+    .SA_admin_profile {
+        align-items: flex-start;
+    }
+
+    /* Location */
+    .SA_city_text {
+        font-size: 0.85rem;
+        color: #475569;
+    }
+
+    /* Contact stack spacing */
+    .SA_contact_stack {
+        gap: 8px;
+    }
+
+    /* Payment dropdown full width */
+    .SA_plan_badge {
+        width: 100%;
+    }
+
+    /* Status badge spacing */
+    .SA_row_badge {
+        margin-top: 6px;
+    }
+
+    /* Actions aligned nicely */
+    .SA_row_actions {
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    .SA_action_icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Disable hover lift on mobile */
+    .SA_action_icon:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Container padding */
+    .SA_table_container {
+        padding: 10px;
+        overflow: visible;
+    }
+}
+
+/* Requested Service Card Styles */
+.SA_requested_service_card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    max-width: 250px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.SA_requested_service_card .service_name {
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px !important;
+    font-size: 0.88rem;
+    line-height: 1.2;
+}
+
+.SA_requested_service_card .service_meta {
+    font-size: 0.78rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px !important;
+}
+
+.SA_requested_service_card .service_msg {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-style: italic;
+    border-top: 1px dashed #e2e8f0;
+    padding-top: 4px;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.SA_no_details {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+/* Existing Sectors Badges */
+.existing-sectors-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+    text-align: left;
+}
+
+.sector-badge {
+    padding: 2px 8px;
+    background: #f5f3ff;
+    color: #7c3aed;
+    border: 1px solid #ddd6fe;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.SA_admin_info_col {
+    display: flex;
+    flex-direction: column;
+}

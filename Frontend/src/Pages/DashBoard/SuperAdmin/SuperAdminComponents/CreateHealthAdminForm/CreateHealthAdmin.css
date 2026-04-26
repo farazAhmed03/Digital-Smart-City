@@ -1,0 +1,31 @@
+/* Reuse the base styles from CreateAdmin.css but override colors for medical theme */
+@import "../CreateAdminForm/CreateAdmin.css";
+
+.health-theme .SA_card_indicator.medical-indicator {
+    background: #eff6ff;
+    color: #0ea5e9;
+}
+
+.health-theme .SA_input_box label svg {
+    color: #0ea5e9;
+}
+
+.health-theme .SA_input_box input:focus,
+.health-theme .SA_input_box select:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+.health-theme .SA_primary_btn.medical-btn {
+    background: #0ea5e9;
+    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
+}
+
+.health-theme .SA_primary_btn.medical-btn:hover {
+    background: #0284c7;
+    box-shadow: 0 15px 30px rgba(14, 165, 233, 0.3);
+}
+
+.health-theme .SA_form_header_inline h2 {
+    color: #0369a1;
+}

@@ -1,0 +1,135 @@
+/* Business Home Page Specific Styles */
+
+.business-actions-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.business-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-register {
+    background: #27ae60;
+    color: white;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+.btn-register:hover {
+    background: #2ecc71;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+}
+
+.btn-login {
+    background: transparent;
+    color: #27ae60;
+    border: 1.5px solid #27ae60;
+}
+
+.btn-login:hover {
+    background: rgba(39, 174, 96, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Enhancing the Hero Title in Business Section */
+.content-cont h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    line-height: 1.2;
+}
+
+.content-cont h1 strong {
+    color: #27ae60;
+    position: relative;
+}
+
+.content-cont h1 strong::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(39, 174, 96, 0.1);
+    z-index: -1;
+}
+
+.pg-desc {
+    font-size: 1.2rem;
+    color: #576574;
+    max-width: 800px;
+    margin: 0 auto 50px;
+}
+
+/* Card Improvements */
+.card-Container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.4s ease !important;
+    border: 1px solid rgba(0, 0, 0, 0.03) !important;
+}
+
+.card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pg-crd-btn {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pg-crd-btn:hover {
+    background: #27ae60;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .business-actions-container {
+        justify-content: center;
+        padding: 15px;
+    }
+    
+    .content-cont h1 {
+        font-size: 2.2rem;
+    }
+    
+    .business-btn {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+}

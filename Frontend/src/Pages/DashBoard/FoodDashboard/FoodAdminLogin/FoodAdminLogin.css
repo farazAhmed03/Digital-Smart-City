@@ -1,0 +1,147 @@
+.Adm-login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #27ae60, #2c3e50);
+    font-family: "Outfit", sans-serif;
+}
+
+.Adm-login-card {
+    width: 380px;
+    padding: 35px 30px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.Adm-login-card h2 {
+    margin-bottom: 6px;
+    font-size: 26px;
+    color: #fbc531;
+}
+
+.Adm-login-card p {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+.Adm-input-group {
+    margin-bottom: 18px;
+}
+
+.Adm-input-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+/* UPDATED NORMAL INPUT STYLING */
+.Adm-input-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #063c2a;
+    transition: all 0.25s ease;
+}
+
+/* Focus Effect */
+.Adm-input-group input:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.25);
+    background: #ffffff;
+}
+
+/* Placeholder */
+.Adm-input-group input::placeholder {
+    color: #6b8f80;
+    font-size: 13px;
+}
+
+.Adm-password-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.Adm-password-box input {
+    flex: 1;
+    border: none;
+    padding: 12px 14px;
+}
+
+.Adm-password-box span {
+    padding: 0 14px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.Adm-login-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    background: #fbc531;
+    color: #2c3e50;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+    box-shadow: -1px -1px 0px snow;
+}
+
+.Adm-login-btn:hover {
+    background: #e1b12c;
+    transform: translateY(-2px);
+}
+
+.Adm-login-btn:active {
+    box-shadow: 1px 1px 0px snow;
+    transform: translateY(0);
+}
+
+.Adm-login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.forgot-password-link {
+    text-align: right;
+    margin-top: 8px;
+    padding-right: 5px;
+}
+
+.Adm-forgot-btn {
+    background: transparent;
+    border: none;
+    color: #fbc531;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.Adm-forgot-btn:hover {
+    opacity: 0.8;
+}
+
+.Adm-login-footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    opacity: 0.75;
+}

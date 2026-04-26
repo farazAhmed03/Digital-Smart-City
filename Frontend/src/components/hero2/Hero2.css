@@ -1,0 +1,274 @@
+.how-it-works {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.titlee {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #000;
+  border-left: 6px solid #00c68a;
+  padding-left: 10px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: left;
+  margin-left: 100px;
+  display: block;
+  font-family: "Poppins", sans-serif;
+}
+
+.roadmap {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  height: 300px;
+}
+
+/* SVG Road */
+.road-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.road-path {
+  animation: wavePath 6s ease-in-out infinite alternate;
+}
+
+.road-dash {
+  stroke-dasharray: 20 20;
+  animation: moveDash 2s linear infinite;
+}
+
+/* Animate the road subtly */
+@keyframes wavePath {
+  0% {
+    d: path("M0,150 C150,50 350,250 500,150 C650,50 850,250 1000,150");
+  }
+  50% {
+    d: path("M0,150 C150,100 350,200 500,150 C650,100 850,200 1000,150");
+  }
+  100% {
+    d: path("M0,150 C150,50 350,250 500,150 C650,50 850,250 1000,150");
+  }
+}
+
+/* Move dashed line */
+@keyframes moveDash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+/* Step Styles */
+.step {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  animation: fadeUp 1.2s ease-in-out;
+}
+
+.step h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+}
+
+.step p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Step positions */
+.step1 {
+  top: 50%;
+  left: 1%;
+}
+.step2 {
+  top: -6%;
+  left: 25%;
+}
+.step3 {
+  top: 55%;
+  left: 53%;
+}
+.step4 {
+  top: -6%;
+  left: 75%;
+}
+
+/* Colored Circles */
+.circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bounce 2s infinite;
+}
+
+.green {
+  background: #00c68a;
+}
+.purple {
+  background: #8b3eff;
+}
+.blue {
+  background: #0056ff;
+}
+.orange {
+  background: #ff8b00;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ✅ RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .titlee {
+    margin-left: 50px;
+    font-size: 2rem;
+  }
+
+  .roadmap {
+    height: 260px;
+  }
+
+  .step {
+    width: 160px;
+  }
+}
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .titlee {
+    font-size: 1.8rem;
+    margin-left: 30px;
+  }
+
+  .roadmap {
+    height: 220px;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+  }
+
+  .step p {
+    font-size: 0.85rem;
+  }
+
+  .step {
+    width: 140px;
+  }
+  /* adjust positions */
+  .step1 { top: 60%; left: 2%; }
+  .step2 { top: 0%; left: 20%; }
+  .step3 { top: 60%; left: 48%; }
+  .step4 { top: 0%; left: 72%; }
+}
+
+
+
+
+
+
+@media (max-width: 576px) {
+  .titlee {
+    font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 6px;
+  margin: 0 auto 30px;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  }
+  .titlee::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: #00c68a;
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+.titlee:hover {
+  color: #0e0e0e;
+}
+
+.titlee:hover::after {
+  width: 70%;
+}
+  .roadmap {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .road-svg {
+   position: relative;
+  }
+
+  .step {
+    position: static;
+    width: 90%;
+    margin: 20px auto;
+    animation: none;
+  }
+
+  .circle {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .step h3 {
+    font-size: 1rem;
+  }
+
+  .step p {
+    font-size: 0.85rem;
+}
+}

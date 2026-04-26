@@ -1,0 +1,166 @@
+/* SuperAdminHome.css */
+.SA_empty_state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+}
+
+.SA_layout {
+    display: flex;
+    gap: 20px;
+}
+
+/* --- SIDEBAR --- */
+.SA_sidebar {
+    width: 90px;
+    height: 100vh;
+    background: #ffffff;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center everything */
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+}
+
+/* The Single Brand Mark */
+.SA_brand_mark {
+    width: 48px;
+    height: 48px;
+    background: #108551;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    border-radius: 16px;
+    /* Squircle shape */
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    /* Big gap before menu starts */
+    box-shadow: 0 8px 20px rgba(16, 133, 81, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.SA_brand_mark:hover {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+/* Nav Menu: Icon Centering */
+.SA_side_nav {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex: 1; /* Take up vertical space */
+}
+
+.SA_logout_item {
+    margin-top: auto;
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 14px;
+    color: #94a3b8;
+    transition: all 0.3s ease;
+}
+
+.SA_logout_item:hover {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.SA_side_nav li {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 14px;
+    color: #94a3b8;
+    /* Muted Slate */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* Icon size for icon-only mode */
+.SA_side_nav li svg {
+    font-size: 1.6rem;
+}
+
+/* Hover: Tooltip Effect or Background change */
+.SA_side_nav li:hover {
+    background: #f1f5f9;
+    color: #108551;
+}
+
+.SA_side_nav li.active {
+    background: rgba(16, 133, 81, 0.1);
+    color: #108551;
+}
+
+.SA_notif_badge {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: red;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+/* --- MAIN CONTENT CONTAINER --- */
+.SA_content_main {
+    width: 100%;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+.SA_sidebar_loading {
+    color: #94a3b8;
+    font-size: 1.5rem;
+    font-weight: 800;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}

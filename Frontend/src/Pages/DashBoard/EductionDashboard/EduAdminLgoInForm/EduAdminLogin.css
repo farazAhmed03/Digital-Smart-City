@@ -1,0 +1,242 @@
+/* ===== Wrapper ===== */
+.Edu-Cata-Adm-login-wrapper {
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Outfit;
+}
+
+/* ===== Container ===== */
+.Edu-Cata-Adm-login-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+/* ===== LEFT SIDE ===== */
+.Edu-Cata-Adm-login-left {
+    position: relative;
+    background: linear-gradient(135deg, #0d915a, #0b7b4d, #0a6a42);
+    color: white;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Soft glow circle */
+.Edu-Cata-Adm-login-left::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -120px;
+    right: -120px;
+}
+
+/* Bottom glow */
+.Edu-Cata-Adm-login-left::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    bottom: -100px;
+    left: -100px;
+}
+
+.Edu-Cata-Adm-login-left h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+.Edu-Cata-Adm-login-left p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.95;
+    margin-bottom: 35px;
+    max-width: 420px;
+    z-index: 2;
+}
+
+/* ===== RIGHT SIDE ===== */
+.Edu-Cata-Adm-login-right {
+    background: #ffffff;
+    padding: 80px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Card ===== */
+.Edu-Cata-Adm-login-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.Edu-Cata-Adm-login-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.Edu-Cata-Adm-login-card p {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Inputs */
+.Edu-Cata-Adm-input-group {
+    margin-bottom: 22px;
+}
+
+.Edu-Cata-Adm-input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.Edu-Cata-Adm-input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.Edu-Cata-Adm-input-group input:focus {
+    border-color: #0d915a;
+    box-shadow: 0 0 0 4px rgba(13, 145, 90, 0.15);
+    outline: none;
+}
+
+/* Password */
+.Edu-Cata-Adm-password-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.Edu-Cata-Adm-password-box:focus-within {
+    border-color: #0d915a;
+    box-shadow: 0 0 0 4px rgba(13, 145, 90, 0.15);
+}
+
+.Edu-Cata-Adm-password-box input {
+    flex: 1;
+    border: none;
+    padding: 14px 16px;
+    outline: none;
+}
+
+.Edu-Cata-Adm-password-box span {
+    padding: 0 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #0d915a;
+    font-weight: 600;
+}
+
+/* Button */
+.Edu-Cata-Adm-login-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #0d915a, #0b7b4d);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.25s ease;
+}
+
+.Edu-Cata-Adm-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(13, 145, 90, 0.3);
+}
+
+.Edu-Cata-Adm-login-btn:active {
+    transform: scale(0.98);
+}
+
+.Edu-Cata-edu-Admin-login-back-btn {
+    text-align: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #f1f3f5;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.Edu-Cata-edu-Admin-login-back-btn:hover {
+    background: #e2e6ea;
+    transform: translateX(-2px);
+}
+
+.Edu-Cata-edu-Admin-login-back-btn:active {
+    transform: scale(0.97);
+}
+
+.Edu-Cata-Adm-login-.forgot-password-link {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.forgot-password-link span {
+    font-size: 13px;
+    color: #1f8e5c;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.forgot-password-link span:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.Edu-Cata-Adm-login-footer {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1000px) {
+    .Edu-Cata-Adm-login-container {
+        grid-template-columns: 1fr;
+    }
+
+    .Edu-Cata-Adm-login-left {
+        padding: 50px 40px;
+        text-align: center;
+    }
+
+    .Edu-Cata-Adm-login-right {
+        padding: 50px 40px;
+    }
+}

@@ -1,0 +1,281 @@
+/* ================= ELEGANT COLLEGE DESIGN ================= */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+    --clg-accent: #2563EB;
+    --clg-bg: #F8FAFC;
+    --clg-white: #FFFFFF;
+    --clg-dark: #0F172A;
+    --clg-muted: #64748B;
+    --clg-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+    --clg-shadow-hover: 0 20px 60px -15px rgba(0, 0, 0, 0.1);
+    --clg-radius: 20px;
+    --clg-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clg-page-wrapper {
+    background-color: var(--clg-bg);
+    color: var(--clg-dark);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+}
+
+.clg-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* ================= 1. HERO MINIMAL ================= */
+.clg-hero-minimal {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 5%;
+    background: linear-gradient(rgba(248, 250, 252, 0.5), rgba(248, 250, 252, 0.7)),
+        url('https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Decorative Shapes */
+.clg-hero-bg-shapes .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.2;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--clg-accent);
+    top: -100px;
+    left: -100px;
+    animation: clg-floatShape 20s infinite alternate;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: #16A34A;
+    bottom: -50px;
+    right: -50px;
+    animation: clg-floatShape 15s infinite alternate-reverse;
+}
+
+@keyframes clg-floatShape {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100px, 50px); }
+}
+
+.clg-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.clg-hero-inner h1 {
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--clg-dark);
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.clg-hero-inner p {
+    font-size: 1.25rem;
+    color: var(--clg-muted);
+    margin-bottom: 3.5rem;
+    font-weight: 400;
+}
+
+/* Glassmorphism Search */
+.clg-glass-search {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    max-width: 650px;
+    margin: 0 auto;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+}
+
+.clg-search-icon {
+    margin-left: 20px;
+    color: var(--clg-muted);
+    font-size: 1.2rem;
+}
+
+.clg-glass-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+    color: var(--clg-dark);
+}
+
+.clg-glass-search button {
+    background: var(--clg-accent);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 100px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--clg-transition);
+}
+
+.clg-glass-search button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
+
+/* ================= 2. LISTING GRID ================= */
+.clg-listing-minimal {
+    padding: 100px 0;
+}
+
+.clg-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.clg-simple-card {
+    background: var(--clg-white);
+    border-radius: 24px;
+    padding: 15px;
+    transition: var(--clg-transition);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.clg-simple-card:hover {
+    border-color: rgba(37, 99, 235, 0.2);
+    background: white;
+    box-shadow: var(--clg-shadow);
+}
+
+.clg-simple-img {
+    height: 220px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.clg-simple-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.clg-simple-info h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.clg-simple-info p {
+    color: var(--clg-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.clg-view-btn {
+    width: 100%;
+    padding: 14px;
+    background: #F1F5F9;
+    color: var(--clg-dark);
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--clg-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.clg-simple-card:hover .clg-view-btn {
+    background: var(--clg-accent);
+    color: white;
+}
+
+/* ================= LOADING ================= */
+.clg-loading-full {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: var(--clg-bg);
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--clg-accent);
+    border-radius: 50%;
+    animation: clg-spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes clg-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.clg-no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px 0;
+    color: var(--clg-muted);
+}
+
+.clg-no-results h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--clg-dark);
+    margin-bottom: 1rem;
+}
+
+.clg-no-results p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .clg-hero-inner h1 {
+        font-size: 2.5rem;
+    }
+
+    .clg-glass-search {
+        flex-direction: column;
+        border-radius: 30px;
+    }
+
+    .clg-glass-search button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

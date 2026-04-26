@@ -1,0 +1,60 @@
+.errPgBody {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f2f2f2;
+    color: #333;
+    text-align: center;
+}
+
+.errPgBody .container {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.errPgBody h1 {
+    font-size: 8rem;
+    margin: 0;
+    color: #ff6b6b;
+}
+
+.errPgBody h2 {
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+.errPgBody p {
+    font-size: 1.1rem;
+    margin: 20px 0;
+    color: #666;
+}
+
+.errPgBody .btn {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.errPgBody .btn:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+    .errPgBody h1 {
+        font-size: 5rem;
+    }
+
+    .errPgBody h2 {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,59 @@
+.mgr-form {
+    padding: 0px 30px 30px 30px;
+    background: #ffffff;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.mgr-heading {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Inputs & Selects */
+.mgr-form input,
+.mgr-form select {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    background: #f8f8f8;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.mgr-form input:focus,
+.mgr-form select:focus {
+    border-color: #2ea66f;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(46, 166, 111, 0.2);
+}
+
+/* Button */
+.mgr-form button {
+    height: 44px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #2ea66f;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.mgr-form button:hover {
+    background: #24945f;
+}
+
+.mgr-form button:active {
+    transform: scale(0.98);
+}

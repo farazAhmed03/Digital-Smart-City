@@ -1,0 +1,451 @@
+/* Global Overrides for Food Page */
+.FoodHomePremium {
+    background-color: #f8f9fb;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Luxury Hero Section */
+.FoodHeroPremium {
+    height: 80vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.HeroOverlay {
+    padding: 20px;
+    max-width: 1000px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.fd-HeroBadge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.HeroContent h1 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.HeroContent h1 strong {
+    color: #fbc531;
+}
+
+.HeroLead {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.HeroBtnGroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.HeroBtnGroup button {
+    padding: 18px 40px;
+}
+
+.btn-primary {
+    background: #fbc531;
+    color: #2c3e50;
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1.1rem;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    background: #e1b12c;
+    transform: translateY(-3px);
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #2c3e50;
+    transform: translateY(-3px);
+}
+
+.fd-hero-admin-login-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Merchant Section */
+.MerchantSection {
+    padding: 88px 20px;
+    background:
+        radial-gradient(circle at top center, rgba(255, 176, 68, 0.1), transparent 30%),
+        linear-gradient(180deg, #0b1019 0%, #101523 100%);
+}
+
+.MerchantContainer {
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+.MerchantCard {
+    background: linear-gradient(135deg, rgba(19, 24, 37, 0.98), rgba(13, 17, 28, 0.98));
+    border-radius: 32px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
+    overflow: hidden;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.38);
+}
+
+.MerchantInfo {
+    padding: 56px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background:
+        radial-gradient(circle at top left, rgba(255, 181, 72, 0.08), transparent 30%),
+        linear-gradient(180deg, #22364c 0%, #24384d 100%);
+}
+
+.MerchantEyebrow {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: #f7be56;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.MerchantInfo h2 {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.05;
+    margin-bottom: 22px;
+}
+
+.MerchantInfo h2 strong {
+    color: #ffbc49;
+}
+
+.MerchantInfo p {
+    font-size: 1.04rem;
+    color: rgba(239, 244, 250, 0.82);
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.MerchantPerks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.MerchantPerks li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: #f5f7fb;
+}
+
+.MerchantPerks li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffbf4f, #ff9c2f);
+    box-shadow: 0 0 18px rgba(255, 167, 47, 0.35);
+}
+
+.MerchantDivider {
+    width: 100%;
+    height: 1px;
+    margin: 26px 0 24px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.MerchantExisting p {
+    margin: 0 0 8px;
+    font-size: 0.92rem;
+    color: rgba(230, 237, 245, 0.68);
+}
+
+.MerchantDashboardLink {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #ffbf52;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.MerchantDashboardLink:hover {
+    color: #ffd17a;
+    transform: translateX(2px);
+}
+
+.MerchantFormWrapper {
+    background: white;
+    padding: 50px;
+}
+
+/* Category Grid */
+.FoodCategoriesPremium {
+    padding: 100px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.SectionTitleCenter {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.SectionTitleCenter h2 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.SectionTitleCenter h2 strong {
+    color: #27ae60;
+}
+
+.SectionTitleCenter p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+.fd-CategoriesGridPremium {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.fd-CategoryCardPremium {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: 0.4s;
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+}
+
+.fd-CategoryCardPremium:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.CategoryThumb {
+    height: 250px;
+    position: relative;
+}
+
+.CategoryThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.CategoryIcon {
+    position: absolute;
+    bottom: -25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #27ae60;
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+}
+
+.CategoryDetails {
+    padding: 40px 30px 30px;
+}
+
+.CategoryDetails h3 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.CategoryDetails p {
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.explore-btn {
+    background: #f1f2f6;
+    color: #2c3e50;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.fd-CategoryCardPremium:hover .explore-btn {
+    background: #27ae60;
+    color: white;
+}
+
+/* Partner CTA */
+.fd-PartnerCta {
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.fd-CtaContent {
+
+    position: relative;
+    z-index: 2;
+}
+
+.fd-PartnerCta h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.fd-PartnerCta h2 strong {
+    color: #fbc531;
+}
+
+.fd-PartnerCta p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.cta-btn {
+    background: white;
+    color: #27ae60;
+    padding: 18px 50px;
+    border-radius: 50px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.cta-btn:hover {
+    background: #fbc531;
+    color: #2c3e50;
+    transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .MerchantCard {
+        grid-template-columns: 1fr;
+    }
+
+    .MerchantInfo {
+        padding: 40px 30px;
+    }
+}
+
+.CategoryIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+    top: 180px;
+    right: 20px;
+    z-index: 20 !important;
+}
+
+.CategoryThumb img {
+    height: 200px;
+}
+
+@media (max-width: 600px) {
+    .HeroContent h1 {
+        font-size: 2rem;
+    }
+
+    .HeroLead {
+        font-size: 1rem;
+    }
+
+    .HeroBtnGroup button {
+        font-size: 0.85rem;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 350px) {
+    .HeroLead {
+        display: none;
+    }
+
+    .HeroContent h1 {
+        font-size: 2.4rem;
+    }
+}

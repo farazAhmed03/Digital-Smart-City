@@ -1,0 +1,142 @@
+/* ================= TOURISM HOME ONLY ================= */
+
+.tourism-home {
+  min-height: 100vh;
+  width: 100%;
+  background: #ffffff !important;
+  color: #000;
+  padding: 40px 20px;
+}
+
+/* registration button */
+.tourism-register-btn {
+  background: #00a86b;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* content wrapper */
+.tourism-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* heading */
+.tourism-content h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tourism-content h1 strong {
+  color: #00a86b;
+}
+
+/* description */
+.tourism-description {
+  width: 80%;
+  margin: 0 auto 30px;
+  text-align: center;
+  color: #555;
+}
+
+/* cards grid */
+.tourism-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* card */
+.tourism-card {
+  position: relative;
+  min-height: 320px;
+  padding: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  transition: transform 0.3s ease;
+}
+
+/* overlay */
+.tourism-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+/* icon wrapper */
+/* .tourism-icon-box {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+} */
+
+
+
+/* card content */
+.tourism-card-title,
+.tourism-card-desc,
+.tourism-card-btn {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+/* title */
+.tourism-card-title {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+/* description text */
+.tourism-card-desc {
+  color: #f1f1f1;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+/* button */
+.tourism-card-btn {
+  align-self: center;
+  background: #00a86b;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tourism-card-btn:hover {
+  background: #007f53;
+}
+
+/* hover effect */
+.tourism-card:hover {
+  transform: translateY(-4px);
+}
+

@@ -1,0 +1,344 @@
+/* ================================
+   PAGE STYLING
+================================ */
+.Tech-Cata-Pg-Sec {
+    margin: 10px;
+}
+
+/* Extra class */
+.flexDsply {
+    display: flex !important;
+}
+
+/* ================================
+   PAGE BANNER
+================================ */
+.Tech-cata-pg-banner {
+    background-color: beige;
+    background-image: url("../../../components/imgs/hero1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    min-height: 15vh;
+    margin-top: 10px;
+    padding: 8px;
+}
+
+.tech-cata-h1 {
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+.tech-cata-p {
+    text-align: center;
+    font-weight: 600;
+    width: 80%;
+}
+
+/* ================================
+   USER ICON & DROPDOWN MENU
+================================ */
+.Usr-Icon-TagsCont {
+    position: absolute;
+    right: 8px;
+    bottom: -18px;
+    padding: 0 0 30px 10px;
+    cursor: pointer;
+}
+
+.usrIcon {
+    background-color: aliceblue;
+    padding: 15px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    transition: 0.3s;
+}
+
+.usrIcon:hover {
+    background-color: rgb(44, 43, 43);
+    box-shadow: 0px 0px 10px snow;
+    color: white;
+}
+
+/* Dropdown menu */
+.tags-cont {
+    background-color: rgb(40, 38, 38);
+    padding: 8px 20px 15px 20px;
+    position: absolute;
+    right: -4px;
+    margin-top: 6px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px snow;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 2;
+}
+
+.Usr-Icon-TagsCont:hover .tags-cont {
+    display: flex;
+}
+
+.tags-cont li {
+    color: snow;
+    padding: 5px;
+    list-style: none;
+    transition: 0.25s;
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.tags-cont li:hover {
+    background-color: rgba(0, 128, 0, 0.687);
+    box-shadow: 0px 2px 0px greenyellow;
+}
+
+/* User-tag for small screens */
+.user-tag {
+    display: none;
+}
+
+/* ================================
+   PAGE BODY LAYOUT
+================================ */
+.tech-cata-fltr-crdsCont {
+    margin: 50px 0;
+    display: grid;
+    grid-template-columns: 0.24fr 1fr;
+    position: relative;
+}
+
+/* Toggle button for filters (mobile) */
+.tech-toggle-btn {
+    display: none;
+}
+
+/* ================================
+   FILTER SIDEBAR
+================================ */
+.tech-cata-fltr {
+    padding: 20px 10px 10px;
+    margin-top: 10px;
+    max-height: 99vh;
+    position: sticky;
+    border-radius: 8px;
+    top: 4px;
+    overflow-y: scroll;
+}
+
+.sector-hdng {
+    background-color: #267252;
+    color: white;
+    font-size: 27px;
+    padding: 5px 0px 5px 25px;
+    margin: 4px 4px 25px 0px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    cursor: pointer;
+}
+
+/* Hide scrollbar */
+.tech-cata-fltr::-webkit-scrollbar {
+    display: none;
+}
+
+/* Filter list */
+.list {
+    margin: 5px 0 5px 18px;
+}
+
+.list li {
+    padding: 6px 0px 6px 20px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.list li:hover {
+    background: linear-gradient(-140deg, whitesmoke 14.7%, #027646 5%);
+    color: white;
+    border: 1px solid black;
+}
+
+/* ================================
+   CATEGORY CARDS CONTAINER
+================================ */
+.tech-cata-crdCont {
+    min-height: 70vh;
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar */
+.tech-cata-crdCont::-webkit-scrollbar {
+    display: none;
+}
+
+/* ================================
+   EXPERT PROFILE PAGE (SINGLE)
+================================ */
+.resume-box {
+    margin: 10px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.role {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.section {
+    text-align: left;
+    margin-top: 18px;
+    box-shadow: -3px 6px 0px rgba(0, 0, 0, 0.1);
+}
+
+.section h3 {
+    margin-bottom: 6px;
+}
+
+.section li {
+    margin-left: 30px;
+}
+
+.preview-btn {
+    margin-top: 15px;
+    padding: 10px 14px;
+    background: #007bff;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-left: 38px;
+}
+
+.preview-btn:hover {
+    background: #005fcc;
+}
+
+/* ================================
+   RESPONSIVE STYLES
+================================ */
+
+@media (max-width: 1050px) {
+    .tech-cata-fltr-crdsCont {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-toggle-btn {
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        top: -35px;
+        right: 10px;
+        background-color: #32b57e;
+        color: whitesmoke;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.59rem;
+    }
+
+    .tech-cata-fltr {
+        position: fixed;
+        background-color: whitesmoke;
+        left: -500px;
+        transition: 0.5s;
+        height: 100vh;
+        top: -10px;
+        z-index: 1001;
+        width: 250px;
+    }
+
+    .list {
+        margin: 0;
+    }
+
+    .list li:active {
+        background: linear-gradient(270deg, #7cc900, #027646);
+        color: white;
+        text-decoration: none;
+    }
+
+    .display {
+        left: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .Tech-cata-pg-banner {
+        align-items: flex-start;
+    }
+
+    .tech-cata-p {
+        display: none;
+    }
+
+    .tech-cata-h1 {
+        font-size: 2.3rem;
+        margin-left: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .Tech-cata-pg-banner {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Usr-Icon-TagsCont {
+        display: none;
+    }
+
+    .user-tag {
+        display: block;
+    }
+}
+
+@media (max-width: 415px) {
+    .Tech-Cata-Pg-Sec {
+        margin: 0;
+    }
+
+    .Tech-cata-pg-banner {
+        gap: 30px;
+        border-radius: 0;
+        margin-top: 0;
+        justify-content: center;
+    }
+
+    .tech-cata-h1 {
+        font-size: 2rem;
+        margin: 0;
+    }
+}

@@ -1,0 +1,233 @@
+/* ===== Wrapper ===== */
+.User-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 75px);
+    width: 100%;
+    overflow: hidden;
+    font-family: Outfit, sans-serif;
+    background: #ffffff;
+}
+
+/* ===== Container ===== */
+.User-login-container {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    width: 100%;
+    max-width: 1300px;
+    height: 100%;
+    min-height: 550px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+/* ===== LEFT SIDE ===== */
+.User-login-left {
+    position: relative;
+    background: linear-gradient(135deg, #0d915a, #0b7b4d, #0a6a42);
+    color: white;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Decorative Glow Circles */
+.User-login-left::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    top: -120px;
+    right: -120px;
+}
+
+.User-login-left::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+    bottom: -100px;
+    left: -100px;
+}
+
+.User-login-left h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+.User-login-left p {
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 420px;
+    opacity: 0.95;
+    z-index: 2;
+}
+
+/* ===== RIGHT SIDE ===== */
+.User-login-right {
+    background: #ffffff;
+    padding: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Login Card Content ===== */
+.User-login-card {
+    width: 100%;
+    max-width: 420px;
+}
+
+.User-login-card h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.User-login-card p {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* ===== Input Groups ===== */
+.User-input-group {
+    margin-bottom: 22px;
+}
+
+.User-input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.User-input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.User-input-group input:focus {
+    border-color: #0d915a;
+    box-shadow: 0 0 0 4px rgba(13,145,90,0.15);
+    outline: none;
+}
+
+/* ===== Password Box ===== */
+.User-password-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s ease;
+}
+
+.User-password-box:focus-within {
+    border-color: #0d915a;
+    box-shadow: 0 0 0 4px rgba(13,145,90,0.15);
+}
+
+.User-password-box input {
+    flex: 1;
+    border: none;
+    padding: 14px 16px;
+    outline: none;
+}
+
+.User-password-box span {
+    padding: 0 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #0d915a;
+    font-weight: 600;
+}
+
+/* ===== Login Button ===== */
+.User-login-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #0d915a, #0b7b4d);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.25s ease;
+}
+
+.User-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(13,145,90,0.3);
+}
+
+.User-login-btn:active {
+    transform: scale(0.98);
+}
+
+.User-login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ===== Footer Links ===== */
+.User-login-footer {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.User-login-footer p {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.User-login-footer button {
+    display: block;
+    background: none;
+    border: none;
+    color: #0d915a;
+    font-size: 13px;
+    margin: 6px auto;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.User-login-footer button:hover {
+    text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1000px) {
+    .User-login-container {
+        grid-template-columns: 1fr;
+    }
+
+    .User-login-left {
+        padding: 60px 40px;
+        text-align: center;
+    }
+
+    .User-login-right {
+        padding: 60px 40px;
+    }
+}

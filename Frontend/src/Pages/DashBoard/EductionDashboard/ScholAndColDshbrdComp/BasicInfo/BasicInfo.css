@@ -1,0 +1,136 @@
+.imageCont {
+    width: 100%;
+    height: 280px;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border: 1px dashed var(--primary);
+    background: linear-gradient(135deg, rgba(13, 145, 90, 0.08), rgba(13, 145, 90, 0.02));
+}
+
+.bannerImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pluseAndChangeText {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.imageCont:hover .pluseAndChangeText {
+    opacity: 1;
+}
+
+.pluseIcn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--primary);
+    font-size: 40px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.changeText {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+
+#hiddenFileField {
+    display: none;
+}
+
+.aboutTextareaAndImg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+}
+
+.aboutTextareaAndImg textarea {
+    width: 100%;
+}
+
+.AboutImgAndUpload {
+    position: relative;
+}
+
+.aboutusImg {
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px dashed var(--primary);
+}
+
+.glassLayer {
+    position: absolute;
+    opacity: 0;
+    height: 250px;
+    width: 100%;
+    top: 0%;
+    background-color: #0000005d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.AboutImgAndUpload:hover .glassLayer {
+    opacity: 1;
+}
+
+.glassLayer .pluseCont {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--primary);
+    font-size: 2.3rem;
+    font-weight: 700;
+}
+
+.AddAboutImgTxt {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ================== RESPONSIVE ================== */
+
+@media (max-width: 1000px) {
+    .aboutTextareaAndImg {
+        flex-direction: column;
+    }
+
+    .AboutImgAndUpload {
+        width: 100%;
+        inset: 0;
+    }
+
+    .aboutusImg {
+        width: 100%;
+    }
+}

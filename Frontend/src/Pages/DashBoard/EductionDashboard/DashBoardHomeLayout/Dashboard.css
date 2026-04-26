@@ -1,0 +1,286 @@
+.layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+
+.DshBrdsidebar {
+    width: 240px;
+    padding: 16px 0;
+    border: none;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    background: #f8fafc;
+    top: 0;
+    font-family: Outfit;
+}
+
+.DshBrdsidebar ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.DshBrdsidebar li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 8px 8px 15px;
+    margin: 6px 0px;
+    cursor: pointer;
+}
+
+.DshBrdsidebar li .DshbrdSidbrIcn {
+    font-size: 24px;
+    padding: 1px;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.DshbrdtagName {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.DshBrdsidebar li.active {
+    background: rgba(0, 0, 0, 0.046);
+}
+
+/* ---------------- CONTENT ---------------- */
+.content {
+    flex-grow: 1;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.content h1 {
+    margin-bottom: 10px;
+}
+
+/* ---------------- RESPONSIVE STYLING ---------------- */
+@media (max-width: 1100px) {
+    .DshBrdsidebar {
+        width: auto;
+    }
+
+    .DshbrdtagName {
+        display: none;
+    }
+}
+
+
+@media (max-width: 1024px) {
+
+    .top-center {
+        font-size: 13px;
+    }
+
+    .DashBoardlogo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .brandName {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .DshBrdsidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .topbar {
+        padding: 10px 15px;
+        justify-content: space-between;
+    }
+
+    .top-left {
+        gap: 8px;
+    }
+
+    .DashBoardlogo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .brandName {
+        font-size: 1.1rem;
+    }
+
+    .top-center {
+        font-size: 12px;
+        margin-top: 0;
+    }
+
+    .top-right {
+        gap: 8px;
+    }
+
+    .Dshbrdicon {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 530px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .DashBoardlogo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .brandName {
+        font-size: 1rem;
+    }
+
+    .topbar {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 8px 12px;
+        gap: 5px;
+    }
+
+    .top-left {
+        flex: 0 0 auto;
+    }
+
+    .top-center {
+        display: none;
+    }
+
+    .top-right {
+        flex: 0 0 auto;
+        gap: 6px;
+    }
+
+    .DashBoardlogo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .brandName {
+        font-size: 1rem;
+    }
+}
+
+/* ---------------- MOBILE MENU & SIDEBAR TOGGLE ---------------- */
+
+/* Floating menu toggle button (mobile only) */
+.mobile-menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1001;
+
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: none;
+
+        background: #16a162;
+        color: white;
+        font-size: 26px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .DshbrdtagName {
+        display: inline;
+    }
+
+    .mobile-menu-toggle:hover {
+        background: #0d915a;
+        transform: scale(1.05);
+    }
+
+    /* Sidebar slide-in for mobile */
+    .DshBrdsidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 240px;
+        background: white;
+        z-index: 1000;
+
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .DshBrdsidebar i {
+        width: 30px;
+        height: 30px;
+        font-size: 22px;
+        padding: 0;
+        background: #eafff4;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .DshBrdsidebar li:hover .DshbrdSidbrIcn {
+        transform: scale(1.05);
+    }
+
+    .DshBrdsidebar li.active {
+        background: transparent;
+    }
+
+    .DshBrdsidebar li.active::before {
+        display: none;
+    }
+
+    .DshBrdsidebar li.active i {
+        background: #16a162;
+        color: #ffffff;
+        transform: scale(1.1);
+    }
+
+    .DshBrdsidebar.open {
+        left: 0;
+    }
+
+    /* Keep content full width when sidebar hidden */
+    .content {
+        padding-left: 16px;
+    }
+}
+
+/* Optional: overlay behind sidebar when open */
+@media (max-width: 768px) {
+    .DshBrdsidebar.open::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 240px;
+        width: calc(100% - 240px);
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 999;
+    }
+}

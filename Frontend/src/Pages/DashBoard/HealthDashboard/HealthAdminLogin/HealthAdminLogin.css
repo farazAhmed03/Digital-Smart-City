@@ -1,0 +1,251 @@
+/* ===== Wrapper ===== */
+.Health-Cata-Adm-login-wrapper {
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Outfit;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ===== Container ===== */
+.Health-Cata-Adm-login-container {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+/* ===== LEFT SIDE ===== */
+.Health-Cata-Adm-login-left {
+    position: relative;
+    background: linear-gradient(135deg, #108551, #0d6d42, #0a5a36);
+    color: white;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Soft glow circle */
+.Health-Cata-Adm-login-left::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -120px;
+    right: -120px;
+}
+
+/* Bottom glow */
+.Health-Cata-Adm-login-left::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    bottom: -100px;
+    left: -100px;
+}
+
+.Health-Cata-Adm-login-left h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+.Health-Cata-Adm-login-left p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.95;
+    margin-bottom: 35px;
+    max-width: 420px;
+    z-index: 2;
+}
+
+/* ===== RIGHT SIDE ===== */
+.Health-Cata-Adm-login-right {
+    background: #ffffff;
+    padding: 80px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Card ===== */
+.Health-Cata-Adm-login-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.Health-Cata-Adm-login-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.Health-Cata-Adm-login-card p {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Inputs */
+.Health-Cata-Adm-input-group {
+    margin-bottom: 22px;
+}
+
+.Health-Cata-Adm-input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.Health-Cata-Adm-input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.Health-Cata-Adm-input-group input:focus {
+    border-color: #108551;
+    box-shadow: 0 0 0 4px rgba(16, 133, 81, 0.15);
+    outline: none;
+}
+
+/* Password */
+.Health-Cata-Adm-password-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.Health-Cata-Adm-password-box:focus-within {
+    border-color: #108551;
+    box-shadow: 0 0 0 4px rgba(16, 133, 81, 0.15);
+}
+
+.Health-Cata-Adm-password-box input {
+    flex: 1;
+    border: none;
+    padding: 14px 16px;
+    outline: none;
+}
+
+.Health-Cata-Adm-password-box span {
+    padding: 0 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #108551;
+    font-weight: 600;
+}
+
+/* Button */
+.Health-Cata-Adm-login-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #108551, #0d6d42);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.25s ease;
+}
+
+.Health-Cata-Adm-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 133, 81, 0.3);
+}
+
+.Health-Cata-Adm-login-btn:active {
+    transform: scale(0.98);
+}
+
+.Health-Cata-Admin-login-back-btn {
+    text-align: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #f1f3f5;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    align-self: flex-start;
+    z-index: 2;
+}
+
+.Health-Cata-Admin-login-back-btn:hover {
+    background: #e2e6ea;
+    transform: translateX(-2px);
+}
+
+.Health-Cata-Admin-login-back-btn:active {
+    transform: scale(0.97);
+}
+
+.forgot-password-link {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.forgot-password-link span {
+    font-size: 13px;
+    color: #0d6d42;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.forgot-password-link span:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.Health-Cata-Adm-login-footer {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1000px) {
+    .Health-Cata-Adm-login-container {
+        grid-template-columns: 1fr;
+    }
+
+    .Health-Cata-Adm-login-left {
+        padding: 50px 40px;
+        text-align: center;
+    }
+    
+    .Health-Cata-Admin-login-back-btn {
+        align-self: center;
+    }
+
+    .Health-Cata-Adm-login-right {
+        padding: 50px 40px;
+    }
+}

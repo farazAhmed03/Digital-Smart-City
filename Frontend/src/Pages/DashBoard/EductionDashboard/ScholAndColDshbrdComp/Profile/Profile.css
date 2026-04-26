@@ -1,0 +1,164 @@
+/* OVERVIEW GRID */
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    width: 100%;
+    margin-top: 10px;
+    align-content: start;
+}
+
+.overview-section {
+    max-width: 950px;
+    /* controls layout width */
+    margin: 0 auto;
+    /* centers content */
+    padding: 30px 0px 30px 0px;
+}
+
+.overview-header {
+    margin-bottom: 40px;
+}
+
+.overview-header h2 {
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0px;
+    color: #0f172a;
+    text-decoration: 4px green underline;
+}
+
+.overview-header-para {
+    margin: 6px 0 0 0;
+    font-size: 14px;
+    color: rgba(15, 23, 42, 0.65);
+    font-weight: 500;
+}
+
+/* CARD */
+.Dshbrdcard {
+    border-radius: 22px;
+    padding: 26px 24px;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    transition: all 0.25s ease;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.Dshbrdcard:hover {
+    transform: translateY(-5px);
+    border-color: rgba(52, 190, 130, 0.45);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Trail Para Styling */
+
+.trial-expired {
+    background-color: #fee2e2;
+    padding: 6px;
+    color: #991b1b;
+    display: inline-block;
+    margin-top: 15px;
+    border-left: 6px solid #ef4444;
+    border-right: 10px double #ef4444;
+}
+
+.trial-active p {
+    background-color: rgba(0, 128, 0, 0.068);
+    padding: 6px;
+    display: inline-block;
+    margin-top: 15px;
+    border-left: 6px solid rgb(33, 199, 33);
+    border-right: 10px double rgb(33, 199, 33);
+}
+
+/* Label */
+.label {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: 0.3px;
+}
+
+/* Bottom row */
+.Dshbrdcard-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 18px;
+}
+
+/* Value */
+.DshBrd-content {
+    font-size: 32px;
+    /* BIG */
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.2px;
+    line-height: 1;
+}
+
+/* Approved / Verified */
+.DshBrd-content.approved {
+    color: #34be82;
+}
+
+/* Icon */
+.Dshbrdcard-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(52, 190, 130, 0.14);
+    color: #34be82;
+
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.Dshbrdcard:hover .Dshbrdcard-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .overview-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .Dshbrdcard {
+        min-height: 155px;
+    }
+}
+
+@media (max-width: 640px) {
+    .overview-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 12px;
+    }
+
+    .Dshbrdcard {
+        min-height: 140px;
+        padding: 20px;
+    }
+
+    .DshBrd-content {
+        font-size: 28px;
+    }
+
+    .Dshbrdcard-icon {
+        width: 52px;
+        height: 52px;
+    }
+}

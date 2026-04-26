@@ -1,0 +1,146 @@
+/* ForgotPass.css */
+.forgot-pass-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8fcfb 0%, #e8f5ed 100%);
+    padding: 20px;
+}
+
+.forgot-pass-container {
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+}
+
+.back-to-login {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #444;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s;
+}
+
+.back-to-login:hover {
+    color: #1f8e5c;
+    transform: translateX(-5px);
+}
+
+.forgot-pass-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(31, 142, 92, 0.1);
+}
+
+.forgot-pass-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.icon-badge {
+    width: 60px;
+    height: 60px;
+    background: #e8f5ed;
+    color: #1f8e5c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 15px;
+}
+
+.forgot-pass-header h2 {
+    color: #222;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.forgot-pass-header p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #eee;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #1f8e5c;
+    box-shadow: 0 0 0 3px rgba(31, 142, 92, 0.1);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #1f8e5c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: #176d46;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(31, 142, 92, 0.2);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.resend-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.resend-text span {
+    color: #1f8e5c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.resend-text span:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .forgot-pass-card {
+        padding: 30px 20px;
+    }
+}
