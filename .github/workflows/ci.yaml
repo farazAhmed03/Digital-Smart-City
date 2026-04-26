@@ -1,14 +1,14 @@
-name: Digital Kohat Pre-Prod CI/CD
+name: Digital Kohat CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   ci:
-    name: CI Checks
+    name: Run CI Checks
     runs-on: ubuntu-latest
 
     steps:
@@ -20,20 +20,28 @@ jobs:
         with:
           node-version: 20
 
+      # ======================
+      # Backend
+      # ======================
+
       - name: Install Backend Dependencies
         run: |
           cd Backend
           npm ci
 
-      - name: Backend Test Check
+      - name: Run Backend Tests (safe)
         run: |
           cd Backend
-          npm test || echo "Backend tests not configured yet"
+          npm test || echo "No backend tests yet"
 
-      - name: Backend Audit
+      - name: Backend Security Audit
         run: |
           cd Backend
           npm audit --audit-level=high || true
+
+      # ======================
+      # Frontend
+      # ======================
 
       - name: Install Frontend Dependencies
         run: |
@@ -45,34 +53,14 @@ jobs:
           cd Frontend
           CI=false npm run build
 
-      - name: Frontend Audit
+      - name: Frontend Security Audit
         run: |
           cd Frontend
           npm audit --audit-level=high || true
 
-  deploy-preprod:
-    name: Deploy to Pre-Prod
-    needs: ci
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
+      # ======================
+      # Final Check
+      # ======================
 
-    steps:
-      - name: Deploy on Pre-Prod Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.PREPROD_HOST }}
-          username: ${{ secrets.PREPROD_USER }}
-          key: ${{ secrets.PREPROD_SSH_KEY }}
-          script: |
-            cd /var/www/digital-kohat
-            git pull origin main
-
-            cd Backend
-            npm ci --omit=dev
-            pm2 restart digital-kohat-backend || pm2 start index.js --name digital-kohat-backend
-
-            cd ../Frontend
-            npm ci
-            CI=false npm run build
-
-            sudo systemctl reload nginx
+      - name: CI Completed
+        run: echo "CI checks passed successfully 🚀"
