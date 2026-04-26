@@ -64,7 +64,7 @@ jobs:
           username: ${{ secrets.PREPROD_USER }}
           key: ${{ secrets.PREPROD_SSH_KEY }}
           script_stop: true
-          command_timeout: 10m
+          command_timeout: 30m
           script: |
             set -e
 
