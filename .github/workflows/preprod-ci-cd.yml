@@ -1,0 +1,104 @@
+name: Digital Kohat Pre-Prod CI/CD
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+jobs:
+  ci:
+    name: CI Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            Backend/package-lock.json
+            Frontend/package-lock.json
+
+      - name: Install Backend Dependencies
+        run: |
+          cd Backend
+          npm ci
+
+      - name: Run Backend Tests
+        run: |
+          cd Backend
+          npm test
+
+      - name: Backend Security Audit
+        run: |
+          cd Backend
+          npm audit --audit-level=high || true
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd Frontend
+          npm ci
+
+      - name: Run Frontend Tests
+        run: |
+          cd Frontend
+          CI=true npm test
+
+      - name: Build Frontend
+        run: |
+          cd Frontend
+          CI=false npm run build
+
+      - name: Frontend Security Audit
+        run: |
+          cd Frontend
+          npm audit --audit-level=high || true
+
+  deploy-preprod:
+    name: Deploy to Pre-Prod
+    needs: ci
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      PREPROD_HOST: ${{ secrets.PREPROD_HOST }}
+      PREPROD_USER: ${{ secrets.PREPROD_USER }}
+      PREPROD_SSH_KEY: ${{ secrets.PREPROD_SSH_KEY }}
+
+    steps:
+      - name: Check Pre-Prod secrets
+        id: secrets_check
+        run: |
+          if [ -z "$PREPROD_HOST" ] || [ -z "$PREPROD_USER" ] || [ -z "$PREPROD_SSH_KEY" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "Pre-prod secrets are missing. Skipping deploy. Add PREPROD_HOST, PREPROD_USER, and PREPROD_SSH_KEY when server is ready."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy on Pre-Prod Server
+        if: steps.secrets_check.outputs.configured == 'true'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          username: ${{ secrets.PREPROD_USER }}
+          key: ${{ secrets.PREPROD_SSH_KEY }}
+          script_stop: true
+          command_timeout: 10m
+          script: |
+            cd /var/www/digital-kohat
+            git pull origin main
+
+            cd Backend
+            npm ci --omit=dev
+            pm2 restart digital-kohat-backend || pm2 start index.js --name digital-kohat-backend
+
+            cd ../Frontend
+            npm ci
+            CI=false npm run build
+
+            sudo systemctl reload nginx

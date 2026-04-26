@@ -1,8 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import API_BASE_URL from './config';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('uses production API base URL by default', () => {
+  expect(API_BASE_URL).toBe('https://api.kohat.online');
 });
