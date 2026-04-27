@@ -2,7 +2,7 @@
 
 Digital Kohat is a robust, full-stack (MERN) platform designed to centralize and modernize city services in Kohat. It serves as a digital bridge between citizens, service providers, and city administration, offering a wide range of integrated features and real-time monitoring capabilities.
 
-## 🌟 Services Offered --
+## 🌟 Services Offered ----
 
 Digital Kohat is organized into several key sectors, each providing specialized services to the community:
 
