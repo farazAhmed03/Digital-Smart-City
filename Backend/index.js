@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./config/env.js";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -37,14 +38,12 @@ const app = express();
 app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000;
 
-// ✅ Production Allowed Origins
-const allowedOrigins = [
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-  "https://digital-kohat-indol.vercel.app",
-  "https://kohat.online",
-  "https://www.kohat.online"
-];
+// Production Allowed Origins are environment-driven.
+// Set CORS_ORIGINS="https://app.example.com,https://www.example.com" in AWS Secrets Manager/ECS.
+const allowedOrigins = (process.env.CORS_ORIGINS || process.env.CLIENT_URL || "http://localhost:3000,http://127.0.0.1:3000")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 // ✅ Create HTTP server
 const server = http.createServer(app);
@@ -105,6 +104,15 @@ app.use(generalLimiter);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
+});
+
+app.get("/healthz", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    service: "digital-smart-city-api",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Routes

@@ -1,0 +1,44 @@
+name: destroy-ephemeral-ecs
+
+on:
+  workflow_dispatch:
+    inputs:
+      aws_region:
+        description: AWS region where ephemeral env was deployed
+        required: true
+        default: us-east-1
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  PROJECT: digital-smart-city
+  ENVIRONMENT: ephemeral
+  AWS_REGION: ${{ inputs.aws_region }}
+
+jobs:
+  destroy:
+    name: terraform-destroy
+    runs-on: ubuntu-latest
+    environment: ephemeral
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Destroy ephemeral resources
+        env:
+          AWS_REGION: ${{ env.AWS_REGION }}
+          PROJECT: ${{ env.PROJECT }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+        run: deployment/scripts/destroy-ephemeral-ecs.sh

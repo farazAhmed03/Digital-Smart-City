@@ -1,0 +1,50 @@
+{
+  "family": "prod-digital-smart-city-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/prod-digital-smart-city-ecs-execution-role",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/prod-digital-smart-city-ecs-task-role",
+  "containerDefinitions": [
+    {
+      "name": "api",
+      "image": "IMAGE_URI",
+      "essential": true,
+      "portMappings": [{ "containerPort": 5000, "protocol": "tcp" }],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "PORT", "value": "5000" },
+        { "name": "CORS_ORIGINS", "value": "https://app.example.com,https://www.example.com" }
+      ],
+      "secrets": [
+        { "name": "DB_URL", "valueFrom": "/prod/digital-smart-city/api/DB_URL" },
+        { "name": "JWT_KEY", "valueFrom": "/prod/digital-smart-city/api/JWT_KEY" },
+        { "name": "SESSION_SECRET", "valueFrom": "/prod/digital-smart-city/api/SESSION_SECRET" },
+        { "name": "CLOUDINARY_CLOUD_NAME", "valueFrom": "/prod/digital-smart-city/api/CLOUDINARY_CLOUD_NAME" },
+        { "name": "CLOUDINARY_API_KEY", "valueFrom": "/prod/digital-smart-city/api/CLOUDINARY_API_KEY" },
+        { "name": "CLOUDINARY_API_SECRET", "valueFrom": "/prod/digital-smart-city/api/CLOUDINARY_API_SECRET" },
+        { "name": "SMTP_HOST", "valueFrom": "/prod/digital-smart-city/api/SMTP_HOST" },
+        { "name": "SMTP_USER", "valueFrom": "/prod/digital-smart-city/api/SMTP_USER" },
+        { "name": "SMTP_PASS", "valueFrom": "/prod/digital-smart-city/api/SMTP_PASS" },
+        { "name": "STRIPE_SECRET_KEY", "valueFrom": "/prod/digital-smart-city/api/STRIPE_SECRET_KEY" },
+        { "name": "SENTRY_DSN", "valueFrom": "/prod/digital-smart-city/api/SENTRY_DSN" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/prod-digital-smart-city-api",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "api"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "wget -qO- http://127.0.0.1:5000/healthz || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

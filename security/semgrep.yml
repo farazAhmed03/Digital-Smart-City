@@ -1,0 +1,7 @@
+rules:
+  - id: no-hardcoded-secrets
+    patterns:
+      - pattern-regex: '(sk_live_|sk_test_|mongodb\+srv://|AKIA[0-9A-Z]{16})'
+    message: Potential hardcoded secret detected.
+    severity: ERROR
+    languages: [generic]

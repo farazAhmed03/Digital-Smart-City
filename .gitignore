@@ -17,6 +17,22 @@ obj/
 .env.test.local
 .env.production.local
 *.env
+!*.env.example
+!deployment/env/.env.testing.example
+
+# Terraform local/generated files
+**/.terraform/*
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
 
 # Logs
 npm-debug.log*
@@ -31,8 +47,20 @@ logs/
 .DS_Store
 Thumbs.db
 
-# Documentation artifacts (if any)
+# Documentation artifacts
 implementation_plan.md
 task.md
 walkthrough.md
 PreDeploymentChanges.md
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+.env.*
+deployment/env/.env.testing
+!*.env.example
+!deployment/env/.env.testing.example
