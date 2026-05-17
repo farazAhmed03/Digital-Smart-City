@@ -10,13 +10,11 @@ out/
 bin/
 obj/
 
-# Environment variables
+# Environment variables and local secrets
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
 *.env
+deployment/env/.env.testing
 !*.env.example
 !deployment/env/.env.testing.example
 
@@ -52,15 +50,3 @@ implementation_plan.md
 task.md
 walkthrough.md
 PreDeploymentChanges.md
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-*.env
-.env.*
-deployment/env/.env.testing
-!*.env.example
-!deployment/env/.env.testing.example

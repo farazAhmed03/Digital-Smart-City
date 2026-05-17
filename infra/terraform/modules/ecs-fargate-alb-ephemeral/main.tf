@@ -1,66 +1,38 @@
-variable "project" {
-  type = string
-}
-
-variable "environment" {
-  type = string
-}
-
-variable "aws_region" {
-  type = string
-}
-
-variable "vpc_id" {
-  type = string
-}
-
-variable "public_subnet_ids" {
-  type = list(string)
-}
-
-variable "backend_image" {
-  type = string
-}
-
-variable "frontend_image" {
-  type = string
-}
-
+variable "project" { type = string }
+variable "environment" { type = string }
+variable "aws_region" { type = string }
+variable "vpc_id" { type = string }
+variable "public_subnet_ids" { type = list(string) }
+variable "backend_image" { type = string }
+variable "frontend_image" { type = string }
 variable "backend_container_port" {
   type    = number
   default = 3000
 }
-
 variable "frontend_container_port" {
   type    = number
   default = 8080
 }
-
 variable "task_cpu" {
   type    = number
   default = 512
 }
-
 variable "task_memory" {
   type    = number
   default = 1024
 }
-
 variable "desired_count" {
   type    = number
   default = 1
 }
-
 variable "min_capacity" {
   type    = number
   default = 1
 }
-
 variable "max_capacity" {
   type    = number
   default = 2
 }
-
 variable "secret_arns" {
   type    = map(string)
   default = {}
@@ -68,7 +40,6 @@ variable "secret_arns" {
 
 locals {
   name = "${var.environment}-${var.project}"
-
   common_tags = {
     Project     = var.project
     Environment = var.environment
@@ -103,21 +74,18 @@ resource "aws_security_group" "alb" {
   }
 
   egress {
-    description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name}-alb-sg"
-  })
+  tags = merge(local.common_tags, { Name = "${local.name}-alb-sg" })
 }
 
 resource "aws_security_group" "tasks" {
   name        = "${local.name}-tasks-sg"
-  description = "Allow ALB to reach ECS frontend container"
+  description = "Only ALB may reach ECS task frontend port"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -129,16 +97,13 @@ resource "aws_security_group" "tasks" {
   }
 
   egress {
-    description = "Allow ECS tasks outbound internet access"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name}-tasks-sg"
-  })
+  tags = merge(local.common_tags, { Name = "${local.name}-tasks-sg" })
 }
 
 resource "aws_lb" "this" {
@@ -149,10 +114,7 @@ resource "aws_lb" "this" {
   subnets                    = var.public_subnet_ids
   idle_timeout               = 60
   enable_deletion_protection = false
-
-  tags = merge(local.common_tags, {
-    Name = "${local.name}-alb"
-  })
+  tags                       = merge(local.common_tags, { Name = "${local.name}-alb" })
 }
 
 resource "aws_lb_target_group" "web" {
@@ -172,9 +134,7 @@ resource "aws_lb_target_group" "web" {
     unhealthy_threshold = 3
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name}-web-tg"
-  })
+  tags = merge(local.common_tags, { Name = "${local.name}-web-tg" })
 }
 
 resource "aws_lb_listener" "http" {
@@ -190,31 +150,23 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_ecs_cluster" "this" {
   name = "${local.name}-cluster"
-
   setting {
     name  = "containerInsights"
     value = "enabled"
   }
-
   tags = local.common_tags
 }
 
 resource "aws_iam_role" "execution" {
   name = "${local.name}-ecs-execution-role"
-
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = "ecs-tasks.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
-      }
-    ]
+    Statement = [{
+      Effect = "Allow"
+      Principal = { Service = "ecs-tasks.amazonaws.com" }
+      Action = "sts:AssumeRole"
+    }]
   })
-
   tags = local.common_tags
 }
 
@@ -225,40 +177,28 @@ resource "aws_iam_role_policy_attachment" "execution_managed" {
 
 resource "aws_iam_role_policy" "execution_secrets" {
   count = length(var.secret_arns) > 0 ? 1 : 0
-
-  name = "${local.name}-ecs-secret-read"
-  role = aws_iam_role.execution.id
-
+  name  = "${local.name}-ecs-secret-read"
+  role  = aws_iam_role.execution.id
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "secretsmanager:GetSecretValue"
-        ]
-        Resource = values(var.secret_arns)
-      }
-    ]
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["secretsmanager:GetSecretValue"]
+      Resource = values(var.secret_arns)
+    }]
   })
 }
 
 resource "aws_iam_role" "task" {
   name = "${local.name}-ecs-task-role"
-
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = "ecs-tasks.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
-      }
-    ]
+    Statement = [{
+      Effect = "Allow"
+      Principal = { Service = "ecs-tasks.amazonaws.com" }
+      Action = "sts:AssumeRole"
+    }]
   })
-
   tags = local.common_tags
 }
 
@@ -276,67 +216,25 @@ resource "aws_ecs_task_definition" "web" {
       name      = "backend"
       image     = var.backend_image
       essential = true
-
-      portMappings = [
-        {
-          containerPort = var.backend_container_port
-          protocol      = "tcp"
-        }
-      ]
-
+      portMappings = [{ containerPort = var.backend_container_port, protocol = "tcp" }]
       environment = [
-        {
-          name  = "NODE_ENV"
-          value = "production"
-        },
-        {
-          name  = "PORT"
-          value = tostring(var.backend_container_port)
-        },
-        {
-          name  = "CLIENT_URL"
-          value = "http://${aws_lb.this.dns_name}"
-        },
-        {
-          name  = "FRONTEND_URL"
-          value = "http://${aws_lb.this.dns_name}"
-        },
-        {
-          name  = "CORS_ORIGINS"
-          value = "http://${aws_lb.this.dns_name}"
-        },
-        {
-          name  = "BASE_URL_PASSWORD_RESET"
-          value = "http://${aws_lb.this.dns_name}"
-        },
-        {
-          name  = "RETURN_URL"
-          value = "http://${aws_lb.this.dns_name}/api/payment/success"
-        },
-        {
-          name  = "CANCEL_URL"
-          value = "http://${aws_lb.this.dns_name}/api/payment/cancel"
-        }
+        { name = "NODE_ENV", value = "production" },
+        { name = "PORT", value = tostring(var.backend_container_port) },
+        { name = "CLIENT_URL", value = "http://${aws_lb.this.dns_name}" },
+        { name = "FRONTEND_URL", value = "http://${aws_lb.this.dns_name}" },
+        { name = "CORS_ORIGINS", value = "http://${aws_lb.this.dns_name}" },
+        { name = "BASE_URL_PASSWORD_RESET", value = "http://${aws_lb.this.dns_name}" },
+        { name = "RETURN_URL", value = "http://${aws_lb.this.dns_name}/payment/success" },
+        { name = "CANCEL_URL", value = "http://${aws_lb.this.dns_name}/payment/cancel" }
       ]
-
-      secrets = [
-        for key, arn in var.secret_arns : {
-          name      = key
-          valueFrom = arn
-        }
-      ]
-
+      secrets = [for key, arn in var.secret_arns : { name = key, valueFrom = arn }]
       healthCheck = {
-        command = [
-          "CMD-SHELL",
-          "wget -qO- http://127.0.0.1:${var.backend_container_port}/healthz || exit 1"
-        ]
+        command     = ["CMD-SHELL", "wget -qO- http://127.0.0.1:${var.backend_container_port}/healthz || exit 1"]
         interval    = 15
         timeout     = 5
         retries     = 3
         startPeriod = 60
       }
-
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -350,32 +248,15 @@ resource "aws_ecs_task_definition" "web" {
       name      = "frontend"
       image     = var.frontend_image
       essential = true
-
-      portMappings = [
-        {
-          containerPort = var.frontend_container_port
-          protocol      = "tcp"
-        }
-      ]
-
-      dependsOn = [
-        {
-          containerName = "backend"
-          condition     = "HEALTHY"
-        }
-      ]
-
+      portMappings = [{ containerPort = var.frontend_container_port, protocol = "tcp" }]
+      dependsOn = [{ containerName = "backend", condition = "HEALTHY" }]
       healthCheck = {
-        command = [
-          "CMD-SHELL",
-          "wget -qO- http://127.0.0.1:${var.frontend_container_port}/healthz || exit 1"
-        ]
+        command     = ["CMD-SHELL", "wget -qO- http://127.0.0.1:${var.frontend_container_port}/healthz || exit 1"]
         interval    = 15
         timeout     = 5
         retries     = 3
         startPeriod = 75
       }
-
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -413,11 +294,8 @@ resource "aws_ecs_service" "web" {
     container_port   = var.frontend_container_port
   }
 
-  depends_on = [
-    aws_lb_listener.http
-  ]
-
-  tags = local.common_tags
+  depends_on = [aws_lb_listener.http]
+  tags       = local.common_tags
 }
 
 resource "aws_appautoscaling_target" "web" {
@@ -437,36 +315,17 @@ resource "aws_appautoscaling_policy" "web_cpu" {
 
   target_tracking_scaling_policy_configuration {
     target_value = 70
-
     predefined_metric_specification {
       predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
-
     scale_in_cooldown  = 60
     scale_out_cooldown = 60
   }
 }
 
-output "alb_dns_name" {
-  value = aws_lb.this.dns_name
-}
-
-output "alb_url" {
-  value = "http://${aws_lb.this.dns_name}"
-}
-
-output "cluster_name" {
-  value = aws_ecs_cluster.this.name
-}
-
-output "service_name" {
-  value = aws_ecs_service.web.name
-}
-
-output "backend_log_group" {
-  value = aws_cloudwatch_log_group.backend.name
-}
-
-output "frontend_log_group" {
-  value = aws_cloudwatch_log_group.frontend.name
-}
+output "alb_dns_name" { value = aws_lb.this.dns_name }
+output "alb_url" { value = "http://${aws_lb.this.dns_name}" }
+output "cluster_name" { value = aws_ecs_cluster.this.name }
+output "service_name" { value = aws_ecs_service.web.name }
+output "backend_log_group" { value = aws_cloudwatch_log_group.backend.name }
+output "frontend_log_group" { value = aws_cloudwatch_log_group.frontend.name }

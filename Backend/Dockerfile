@@ -16,8 +16,8 @@ RUN apk add --no-cache dumb-init wget \
 COPY --from=deps --chown=nodeapp:nodeapp /app/node_modules ./node_modules
 COPY --chown=nodeapp:nodeapp . .
 USER nodeapp
-EXPOSE 5000
+EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:${PORT:-5000}/healthz || exit 1
+  CMD wget -qO- http://127.0.0.1:${PORT:-3000}/healthz || exit 1
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["node", "index.js"]

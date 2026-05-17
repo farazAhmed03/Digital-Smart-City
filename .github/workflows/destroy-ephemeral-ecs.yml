@@ -1,34 +1,35 @@
-name: destroy-ephemeral-ecs
+name: destroy-ephemeral-ecs-fargate-alb
 
 on:
   workflow_dispatch:
     inputs:
       aws_region:
-        description: AWS region where ephemeral env was deployed
-        required: true
+        description: AWS region where ephemeral environment was deployed
+        required: false
         default: us-east-1
 
 permissions:
-  id-token: write
   contents: read
 
 env:
-  PROJECT: digital-smart-city
-  ENVIRONMENT: ephemeral
-  AWS_REGION: ${{ inputs.aws_region }}
+  PROJECT: ${{ vars.PROJECT || 'digital-smart-city' }}
+  ENVIRONMENT: ${{ vars.ENVIRONMENT || 'ephemeral' }}
+  AWS_REGION: ${{ github.event.inputs.aws_region || vars.AWS_REGION || 'us-east-1' }}
 
 jobs:
   destroy:
-    name: terraform-destroy
+    name: terraform-destroy-temporary-environment
     runs-on: ubuntu-latest
     environment: ephemeral
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      - name: Configure AWS credentials via OIDC
+      - name: Configure AWS credentials using repository secrets
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
@@ -36,9 +37,11 @@ jobs:
         with:
           terraform_wrapper: false
 
-      - name: Destroy ephemeral resources
+      - name: Destroy temporary resources
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
           PROJECT: ${{ env.PROJECT }}
           ENVIRONMENT: ${{ env.ENVIRONMENT }}
-        run: deployment/scripts/destroy-ephemeral-ecs.sh
+        run: |
+          chmod +x deployment/scripts/*.sh
+          deployment/scripts/destroy-ephemeral-ecs.sh

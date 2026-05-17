@@ -1,34 +1,38 @@
-name: deploy-ephemeral-ecs
+name: deploy-ephemeral-ecs-fargate-alb
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       aws_region:
         description: AWS region for temporary environment
-        required: true
+        required: false
         default: us-east-1
       destroy_after_test:
         description: Destroy resources after smoke test? true/false
-        required: true
+        required: false
         default: "false"
 
 permissions:
-  id-token: write
   contents: read
 
 env:
-  PROJECT: digital-smart-city
-  ENVIRONMENT: ephemeral
-  AWS_REGION: ${{ inputs.aws_region }}
+  PROJECT: ${{ vars.PROJECT || 'digital-smart-city' }}
+  ENVIRONMENT: ${{ vars.ENVIRONMENT || 'ephemeral' }}
+  AWS_REGION: ${{ github.event.inputs.aws_region || vars.AWS_REGION || 'us-east-1' }}
 
 jobs:
   ci:
     name: ci-build-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
@@ -36,31 +40,35 @@ jobs:
             Backend/package-lock.json
             Frontend/package-lock.json
 
-      - name: Backend dependency install and smoke test
+      - name: Backend install and CI smoke test
         working-directory: Backend
         run: |
           npm ci
           npm test
 
-      - name: Frontend dependency install and production build
+      - name: Frontend install and production build
         working-directory: Frontend
+        env:
+          CI: false
         run: |
           npm ci
           npm test -- --watchAll=false --passWithNoTests
           npm run build
 
   deploy:
-    name: deploy-ecs-fargate-alb
+    name: terraform-ecr-ecs-fargate-alb-deploy
     runs-on: ubuntu-latest
     needs: ci
     environment: ephemeral
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      - name: Configure AWS credentials via OIDC
+      - name: Configure AWS credentials using repository secrets
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
@@ -71,31 +79,38 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Create runtime env file from GitHub secret
+      - name: Create runtime env file from GitHub Secret
         run: |
           mkdir -p deployment/env
           cat > deployment/env/.env.testing <<'ENVEOF'
           ${{ secrets.TESTING_ENV_FILE }}
           ENVEOF
           sed -i 's/^          //' deployment/env/.env.testing
+          chmod 600 deployment/env/.env.testing
 
-      - name: Deploy ephemeral ECS Fargate + ALB
+      - name: Deploy temporary ECS Fargate + ALB environment
         env:
           IMAGE_TAG: ${{ github.sha }}
           AWS_REGION: ${{ env.AWS_REGION }}
           PROJECT: ${{ env.PROJECT }}
           ENVIRONMENT: ${{ env.ENVIRONMENT }}
           ENV_FILE: deployment/env/.env.testing
-        run: deployment/scripts/deploy-ephemeral-ecs.sh
+        run: |
+          chmod +x deployment/scripts/*.sh
+          deployment/scripts/deploy-ephemeral-ecs.sh
 
-      - name: Print ALB URL
+      - name: Print ALB test URL
         working-directory: infra/terraform/envs/ephemeral
-        run: terraform output alb_url
+        run: |
+          echo "ALB_URL=$(terraform output -raw alb_url)" >> "$GITHUB_STEP_SUMMARY"
+          terraform output alb_url
 
       - name: Optional destroy after smoke test
-        if: ${{ inputs.destroy_after_test == 'true' }}
+        if: ${{ github.event.inputs.destroy_after_test == 'true' }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
           PROJECT: ${{ env.PROJECT }}
           ENVIRONMENT: ${{ env.ENVIRONMENT }}
-        run: deployment/scripts/destroy-ephemeral-ecs.sh
+        run: |
+          chmod +x deployment/scripts/*.sh
+          deployment/scripts/destroy-ephemeral-ecs.sh
