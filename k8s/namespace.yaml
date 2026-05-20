@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: __NAMESPACE__
-  labels:
-    app.kubernetes.io/name: digital-smart-city
-    app.kubernetes.io/managed-by: github-actions
