@@ -1,0 +1,279 @@
+name: CI/CD — AWS ECR + EKS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
+  EKS_CLUSTER_NAME: ${{ vars.EKS_CLUSTER_NAME || 'digital-smart-city-cluster' }}
+  ECR_BACKEND_REPOSITORY: ${{ vars.ECR_BACKEND_REPOSITORY || 'digital-smart-city-backend' }}
+  ECR_FRONTEND_REPOSITORY: ${{ vars.ECR_FRONTEND_REPOSITORY || 'digital-smart-city-frontend' }}
+  APP_DOMAIN: ${{ vars.APP_DOMAIN || 'app.example.com' }}
+  API_DOMAIN: ${{ vars.API_DOMAIN || 'api.example.com' }}
+  K8S_NAMESPACE: digital-smart-city
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  # ─── CI: tests, build verify, security ───────────────────────────────────
+  ci:
+    name: Test, Lint & Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: |
+            Backend/package-lock.json
+            Frontend/package-lock.json
+
+      - name: Install & test Backend
+        working-directory: Backend
+        run: |
+          npm ci
+          npm test
+
+      - name: Install & test Frontend
+        working-directory: Frontend
+        env:
+          DISABLE_ESLINT_PLUGIN: "true"
+          CI: "true"
+        run: |
+          npm ci
+          npm test -- --watchAll=false --passWithNoTests
+          npm run build
+
+      - name: Backend dependency audit
+        working-directory: Backend
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Frontend dependency audit
+        working-directory: Frontend
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+
+  # ─── Build images & push to ECR (main only) ───────────────────────────────
+  build-and-push:
+    name: Build & Push to ECR
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      backend_image: ${{ steps.meta.outputs.backend_image }}
+      frontend_image: ${{ steps.meta.outputs.frontend_image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        if: ${{ secrets.AWS_ROLE_ARN != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Configure AWS credentials (access keys)
+        if: ${{ secrets.AWS_ROLE_ARN == '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Ensure ECR repositories exist
+        run: |
+          for repo in "${{ env.ECR_BACKEND_REPOSITORY }}" "${{ env.ECR_FRONTEND_REPOSITORY }}"; do
+            aws ecr describe-repositories --repository-names "$repo" 2>/dev/null \
+              || aws ecr create-repository --repository-name "$repo" --image-scanning-configuration scanOnPush=true
+          done
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set image metadata
+        id: meta
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          SHA: ${{ github.sha }}
+        run: |
+          echo "backend_image=${REGISTRY}/${{ env.ECR_BACKEND_REPOSITORY }}:${SHA}" >> "$GITHUB_OUTPUT"
+          echo "frontend_image=${REGISTRY}/${{ env.ECR_FRONTEND_REPOSITORY }}:${SHA}" >> "$GITHUB_OUTPUT"
+          echo "backend_image_latest=${REGISTRY}/${{ env.ECR_BACKEND_REPOSITORY }}:latest" >> "$GITHUB_OUTPUT"
+          echo "frontend_image_latest=${REGISTRY}/${{ env.ECR_FRONTEND_REPOSITORY }}:latest" >> "$GITHUB_OUTPUT"
+
+      - name: Build & push Backend image
+        env:
+          IMAGE: ${{ steps.meta.outputs.backend_image }}
+          IMAGE_LATEST: ${{ steps.meta.outputs.backend_image_latest }}
+        run: |
+          docker build -t "$IMAGE" -t "$IMAGE_LATEST" ./Backend
+          docker push "$IMAGE"
+          docker push "$IMAGE_LATEST"
+
+      - name: Build & push Frontend image
+        env:
+          IMAGE: ${{ steps.meta.outputs.frontend_image }}
+          IMAGE_LATEST: ${{ steps.meta.outputs.frontend_image_latest }}
+          REACT_APP_API_URL: https://${{ env.API_DOMAIN }}
+        run: |
+          docker build \
+            --build-arg REACT_APP_API_URL="$REACT_APP_API_URL" \
+            -t "$IMAGE" -t "$IMAGE_LATEST" ./Frontend
+          docker push "$IMAGE"
+          docker push "$IMAGE_LATEST"
+
+  # ─── CD: deploy to EKS (main only) ────────────────────────────────────────
+  deploy:
+    name: Deploy to EKS
+    needs: build-and-push
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        if: ${{ secrets.AWS_ROLE_ARN != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Configure AWS credentials (access keys)
+        if: ${{ secrets.AWS_ROLE_ARN == '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: v1.29.0
+
+      - name: Update kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig \
+            --region "${{ env.AWS_REGION }}" \
+            --name "${{ env.EKS_CLUSTER_NAME }}"
+
+      - name: Create or update application secrets
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          JWT_KEY: ${{ secrets.JWT_KEY }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+        run: |
+          if [ -z "$DB_URL" ] || [ -z "$JWT_KEY" ]; then
+            echo "::error::DB_URL and JWT_KEY GitHub secrets are required for deployment."
+            exit 1
+          fi
+          kubectl create namespace "${{ env.K8S_NAMESPACE }}" --dry-run=client -o yaml | kubectl apply -f -
+          ARGS=(
+            --namespace="${{ env.K8S_NAMESPACE }}"
+            --from-literal=DB_URL="$DB_URL"
+            --from-literal=JWT_KEY="$JWT_KEY"
+          )
+          [ -n "$CLOUDINARY_CLOUD_NAME" ] && ARGS+=(--from-literal=CLOUDINARY_CLOUD_NAME="$CLOUDINARY_CLOUD_NAME")
+          [ -n "$CLOUDINARY_API_KEY" ] && ARGS+=(--from-literal=CLOUDINARY_API_KEY="$CLOUDINARY_API_KEY")
+          [ -n "$CLOUDINARY_API_SECRET" ] && ARGS+=(--from-literal=CLOUDINARY_API_SECRET="$CLOUDINARY_API_SECRET")
+          [ -n "$SMTP_HOST" ] && ARGS+=(--from-literal=SMTP_HOST="$SMTP_HOST")
+          [ -n "$SMTP_PORT" ] && ARGS+=(--from-literal=SMTP_PORT="$SMTP_PORT")
+          [ -n "$SMTP_USER" ] && ARGS+=(--from-literal=SMTP_USER="$SMTP_USER")
+          [ -n "$SMTP_PASS" ] && ARGS+=(--from-literal=SMTP_PASS="$SMTP_PASS")
+          [ -n "$SMTP_FROM" ] && ARGS+=(--from-literal=SMTP_FROM="$SMTP_FROM")
+          kubectl create secret generic digital-smart-city-secrets "${ARGS[@]}" \
+            --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: Render Kubernetes manifests
+        env:
+          BACKEND_IMAGE: ${{ needs.build-and-push.outputs.backend_image }}
+          FRONTEND_IMAGE: ${{ needs.build-and-push.outputs.frontend_image }}
+          ACM_CERTIFICATE_ARN: ${{ vars.ACM_CERTIFICATE_ARN }}
+          APP_DOMAIN: ${{ env.APP_DOMAIN }}
+          API_DOMAIN: ${{ env.API_DOMAIN }}
+        run: |
+          if [ -z "$ACM_CERTIFICATE_ARN" ]; then
+            echo "::warning::ACM_CERTIFICATE_ARN is not set. Ingress TLS will fail until you add it as a repository variable."
+          fi
+          RENDER_DIR=k8s-rendered
+          mkdir -p "$RENDER_DIR"
+          for f in k8s/*.yaml; do
+            base=$(basename "$f")
+            case "$base" in
+              secret.example.yaml) continue ;;
+            esac
+            cp "$f" "$RENDER_DIR/$base"
+          done
+          for f in "$RENDER_DIR"/*.yaml; do
+            sed -i "s|BACKEND_IMAGE_PLACEHOLDER|${BACKEND_IMAGE}|g" "$f"
+            sed -i "s|FRONTEND_IMAGE_PLACEHOLDER|${FRONTEND_IMAGE}|g" "$f"
+            sed -i "s|APP_DOMAIN_PLACEHOLDER|${APP_DOMAIN}|g" "$f"
+            sed -i "s|API_DOMAIN_PLACEHOLDER|${API_DOMAIN}|g" "$f"
+            sed -i "s|ACM_CERTIFICATE_ARN_PLACEHOLDER|${ACM_CERTIFICATE_ARN}|g" "$f"
+          done
+          echo "RENDER_DIR=$RENDER_DIR" >> "$GITHUB_ENV"
+
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f "${{ env.RENDER_DIR }}/namespace.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/configmap.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/backend-service.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/frontend-service.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/backend-deployment.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/frontend-deployment.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/hpa-backend.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/hpa-frontend.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/ingress-app.yaml"
+          kubectl apply -f "${{ env.RENDER_DIR }}/ingress-api.yaml"
+
+      - name: Wait for rollouts
+        run: |
+          kubectl rollout status deployment/backend -n "${{ env.K8S_NAMESPACE }}" --timeout=300s
+          kubectl rollout status deployment/frontend -n "${{ env.K8S_NAMESPACE }}" --timeout=300s
+
+      - name: Deployment summary
+        run: |
+          echo "## Deployment complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Service | URL |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---------|-----|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Frontend | https://${{ env.APP_DOMAIN }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Backend API | https://${{ env.API_DOMAIN }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Backend image: \`${{ needs.build-and-push.outputs.backend_image }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Frontend image: \`${{ needs.build-and-push.outputs.frontend_image }}\`" >> "$GITHUB_STEP_SUMMARY"
+          kubectl get pods,svc,ingress -n "${{ env.K8S_NAMESPACE }}"

@@ -70,6 +70,21 @@ Digital-Kohat/
 │   │   └── Pages/       # Sector-specific pages (Education, Health, etc.)
 ```
 
+## ☁️ DevOps — AWS Deployment (EKS)
+
+Production CI/CD is configured via GitHub Actions:
+
+- **CI**: tests, build verification, `npm audit`, Trivy security scan
+- **Build**: separate Docker images for Backend and Frontend → Amazon ECR
+- **CD**: rolling deploy to Amazon EKS with HPA and ALB Ingress
+
+Full setup guide: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**  
+Infrastructure bootstrap: **[infra/README.md](infra/README.md)**
+
+```
+git push main → GitHub Actions → ECR → EKS → https://app.yourdomain.com
+```
+
 ## 🚦 Getting Started
 
 ### Prerequisites

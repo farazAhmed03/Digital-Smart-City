@@ -1,0 +1,42 @@
+# EKS cluster bootstrap (eksctl)
+# Usage: eksctl create cluster -f infra/eksctl-cluster.yaml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: digital-smart-city-cluster
+  region: us-east-1
+  version: "1.29"
+
+vpc:
+  cidr: 10.0.0.0/16
+  nat:
+    gateway: HighlyAvailable
+
+managedNodeGroups:
+  - name: workers
+    instanceType: t3.medium
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 6
+    volumeSize: 30
+    labels:
+      role: worker
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/digital-smart-city-cluster: "owned"
+
+iam:
+  withOIDC: true
+
+addons:
+  - name: vpc-cni
+    version: latest
+  - name: coredns
+    version: latest
+  - name: kube-proxy
+    version: latest
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["api", "audit", "authenticator"]

@@ -5,6 +5,7 @@ jspm_packages/
 # Build artifacts
 dist/
 build/
+k8s-rendered/
 .next/
 out/
 bin/

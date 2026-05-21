@@ -3,6 +3,10 @@
 
 FROM node:20-alpine AS builder
 WORKDIR /app
+
+ARG REACT_APP_API_URL=
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 COPY package*.json ./
 RUN npm ci
 COPY . .
@@ -10,24 +14,7 @@ RUN npm run build
 
 FROM nginx:alpine
 COPY --from=builder /app/build /usr/share/nginx/html
-
-RUN echo 'server {
-    listen 80;
-    root /usr/share/nginx/html;
-    index index.html;
-    
-    gzip on;
-    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
-    
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
-    
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}' > /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \

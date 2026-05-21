@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: digital-smart-city
+  labels:
+    app.kubernetes.io/name: digital-smart-city
+    app.kubernetes.io/part-of: digital-smart-city
