@@ -1,4 +1,4 @@
-import planLimits from "../Config/planLimits.js";
+import planLimits from "../config/planLimits.js";
 
 /**
  * Strict pre-execution validation for subscription status and feature access.

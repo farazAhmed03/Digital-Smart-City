@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import cloudinary from "../../Config/cloudinary.js";
+import cloudinary from "../../config/cloudinary.js";
 import { checkPlanLimit, validatePlanFeature } from "../../utils/planValidation.js";
 import { getPublicIdFromUrl, selectCollection, getServiceModel } from "../../HelperFun/helperFun.js";
 import { Admins } from "../../Models/Admins.js";
@@ -7,7 +7,7 @@ import { NewServiceRequest } from "../../Models/NewServiceRequest.js";
 import { sendEmail } from "../../utils/emailSender.js";
 import { serviceProviderApprovalTemplate } from "../../templates/serviceProviderApprovalTemplate.js";
 import { admissionApprovalTemplate } from "../../templates/admissionApprovalTemplate.js";
-import planLimits from "../../Config/planLimits.js";
+import planLimits from "../../config/planLimits.js";
 import { deleteImage, cleanupInstituteImages, cleanupAdmissionImages, cleanupAdmissionRecordImages } from "../../utils/cloudinaryCleanup.js";
 
 /* =========================================================

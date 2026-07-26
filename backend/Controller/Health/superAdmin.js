@@ -5,7 +5,7 @@ import { NewServiceRequest } from "../../Models/NewServiceRequest.js";
 import { Schools, Colleges } from "../../Models/Schl&ClgSchemeas.js";
 import { Specialists, Pharmacies, Emergencies } from "../../Models/HealthModels.js";
 import { Appointments } from "../../Models/Appointment.js";
-import planLimits from "../../Config/planLimits.js";
+import planLimits from "../../config/planLimits.js";
 import { cleanupHealthServiceImages, deleteImage, deleteMultipleImages } from "../../utils/cloudinaryCleanup.js";
 import { sendEmail } from "../../utils/emailSender.js";
 import { serviceProviderApprovalTemplate } from "../../templates/serviceProviderApprovalTemplate.js";

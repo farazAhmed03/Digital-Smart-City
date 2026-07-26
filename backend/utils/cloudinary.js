@@ -1,4 +1,4 @@
-import cloudinary from "../Config/cloudinary.js";
+import cloudinary from "../config/cloudinary.js";
 import { getPublicIdFromUrl } from "../HelperFun/helperFun.js";
 import fs from "fs";
 import path from "path";
